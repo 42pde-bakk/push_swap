@@ -6,19 +6,30 @@
 # define STACK_H
 # include <stdlib.h>
 # include <limits.h>
+#include <stdio.h>
+
+typedef struct s_stacknode
+{
+	int					data;
+	struct s_stacknode	*prev;
+	struct s_stacknode	*next;
+}t_stacknode;
 
 typedef struct s_stack
 {
-	int				top;
-	unsigned int	capacity;
-	int				*array;
+	unsigned int	size;
+	t_stacknode		*top;
+	t_stacknode		*bottom;
 }t_stack;
 
-t_stack	*create_stack(unsigned int capacity);
-int		stack_is_full(const t_stack *stack);
+t_stack	*create_stack();
+void	*delete_stack(t_stack* stack);
+//int		stack_is_full(const t_stack *stack);
+int			stack_duplicate_check(const t_stack* stack, int item);
 int		stack_is_empty(const t_stack *stack);
 void	stack_push(t_stack *stack, int item);
 int		stack_pop(t_stack *stack);
 int		stack_peek(const t_stack *stack);
+void	print_stack(const t_stack *stack);
 
 #endif //STACK_H

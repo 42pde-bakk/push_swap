@@ -3,7 +3,7 @@ NAME = push_swap
 SRC_DIR = ./algo
 PRINTF_DIR = ./ft_printf
 
-SRC = main.c
+SRC = main.c stack.c operations.c
 
 FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 # COLORS
