@@ -3,7 +3,7 @@
 //
 
 #include "operations.h"
-#include "../libft/libft.h"
+#include "libft.h"
 
 void	swap(t_stack *a) {
 	int tmp;
@@ -67,11 +67,11 @@ void	rrr(t_stack *a, t_stack *b)
 	reverse_rotate(b);
 }
 
-void	execute_operation(void (*f)(), const char* operation, t_stack *arg1, t_stack *arg2)
+void	execute_operation(void (*f)(), const char* operation, t_stack *a, t_stack *b)
 {
 	ft_putendl_fd(operation, STDOUT_FILENO);
 	if (f == &swap || f == &rotate || f == &reverse_rotate)
-		f(arg1);
+		f(a);
 	else
-		f(arg1, arg2);
+		f(a, b);
 }

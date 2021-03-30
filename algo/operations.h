@@ -6,6 +6,23 @@
 # define PUSH_SWAP_OPERATIONS_H
 # include "stack.h"
 
+enum e_op
+{
+	SA,
+	SB,
+	SS,
+	PA,
+	PB,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR
+};
+
+typedef void (*t_operation)();
+
 void	swap(t_stack *);
 void	ss(t_stack *a, t_stack *b);
 void	push(t_stack *, t_stack *);

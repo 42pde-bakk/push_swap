@@ -8,5 +8,7 @@
 # include <stdlib.h>
 # include "stack.h"
 # include "operations.h"
+# include "utils.h"
+
 
 #endif //PUSH_SWAP_H

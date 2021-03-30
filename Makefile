@@ -3,7 +3,10 @@ NAME = push_swap
 SRC_DIR = ./algo
 PRINTF_DIR = ./ft_printf
 
-SRC = main.c stack.c operations.c
+SRC = main.c \
+	stack.c \
+	operations.c \
+	utils.c
 
 FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 # COLORS
@@ -25,17 +28,19 @@ endif
 all: $(NAME)
 
 $(NAME): $(FILES)
-	@echo "$(BLUE)Remaking libft.a and libftprintf.a"
-	@make re -s -C ./libft
-	@$(CC) $(FLAGS) $(FILES) libft/libft.a -o $(NAME)
+	@echo -e "$(YELLOW)Making libft.a"
+	@make -sC ./libft
+	@echo -e "$(BLUE)Bundling"
+	@$(CC) $(FLAGS) $(FILES) libft/libft.a -o $(NAME) -I libft
+	@echo -e "$(PINK)Done"
 
 clean:
-	/bin/rm -f *.o *~ *.gch
-	@make clean -s -C ./libft
+	@/bin/rm -f *.o *~ *.gch
+	@make clean -sC ./libft
 
 fclean: clean
-	@make fclean -s -C ./libft
-	/bin/rm -f libft.a
-	/bin/rm -f $(NAME)
+	@make fclean -sC ./libft
+	@/bin/rm -f libft.a
+	@/bin/rm -f $(NAME)
 
 re: fclean all

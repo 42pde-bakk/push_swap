@@ -30,6 +30,6 @@ int		stack_is_empty(const t_stack *stack);
 void	stack_push(t_stack *stack, int item);
 int		stack_pop(t_stack *stack);
 int		stack_peek(const t_stack *stack);
-void	print_stack(const t_stack *stack);
+void	print_stacks(const t_stack *a, const t_stack *b);
 
 #endif //STACK_H

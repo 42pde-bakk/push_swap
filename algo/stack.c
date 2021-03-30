@@ -3,17 +3,11 @@
 //
 
 #include "stack.h"
-#include "../libft/libft.h"
+#include "libft.h"
+#include "utils.h"
 
 // function to create a stack of given capacity. It initializes size of
 // stack as 0
-
-static void	fatal_error(const char* s)
-{
-	ft_putendl_fd(s, 2);
-	exit(EXIT_FAILURE);
-}
-
 t_stack	*create_stack()
 {
 	t_stack	*out;
@@ -55,7 +49,6 @@ void	stack_push(t_stack *stack, int item)
 	t_stacknode *node;
 
 	node = new_node(item);
-
 	if (stack->size == 0)
 		stack->bottom = node;
 	else
@@ -72,16 +65,17 @@ int	stack_pop(t_stack *stack)
 {
 	int			out;
 	t_stacknode	*tmp;
-	t_stacknode *newtop;
 
 	if (stack_is_empty(stack))
 		return (INT_MIN);
 	out = stack->top->data;
 	tmp = stack->top;
-	newtop = tmp->prev;
-	if (newtop)
-		tmp->next = NULL;
+	stack->top = tmp->prev;
+	if (stack->top)
+		stack->top->next = NULL;
 	free(tmp);
+	tmp = NULL;
+
 	--stack->size;
 	return (out);
 }
@@ -108,19 +102,26 @@ int	stack_duplicate_check(const t_stack* stack, int item)
 	return (0);
 }
 
-void	print_stack(const t_stack *stack)
+void	print_stacks(const t_stack *a, const t_stack *b)
 {
-	t_stacknode	*tmp;
+	t_stacknode	*tmp_a;
+	t_stacknode	*tmp_b;
 	int fd;
 
-	tmp = stack->bottom;
+	tmp_a = a->top;
+	tmp_b = b->top;
 	fd = STDOUT_FILENO;
-	while (tmp)
+	dprintf(fd, "A\t|\tB\n");
+	while (tmp_a || tmp_b)
 	{
-		ft_putnbr_fd(tmp->data, fd);
-		if (tmp->next)
-			ft_putchar_fd(' ', fd);
-		tmp = tmp->next;
+		if (tmp_a) {
+			ft_putnbr_fd(tmp_a->data, fd);
+			tmp_a = tmp_a->prev;
+		}
+		if (tmp_b) {
+			ft_putnbr_fd(tmp_b->data, fd);
+			tmp_b = tmp_b->prev;
+		}
+		ft_putchar_fd('\n', fd);
 	}
-	ft_putchar_fd('\n', fd);
 }
