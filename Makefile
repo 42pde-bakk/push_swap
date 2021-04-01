@@ -50,9 +50,9 @@ clean:
 	@make clean -sC ft_printf
 
 fclean: clean
-	@make clean -sC libft
-	@make clean -sC getnextline
-	@make clean -sC ft_printf
+	@make fclean -sC libft
+	@make fclean -sC getnextline
+	@make fclean -sC ft_printf
 	@/bin/rm -f $(NAME)
 
 re: fclean all

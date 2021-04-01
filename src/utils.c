@@ -16,7 +16,7 @@ unsigned int	amount_digits(int n)
 {
 	unsigned int	digits;
 
-	digits = 0;
+	digits = 1;
 	if (n < 0)
 		digits = 1;
 	while (n <= -10 || n >= 10)

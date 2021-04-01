@@ -13,7 +13,7 @@ static void	error(t_collection *coll)
 
 t_opcode	string2opcode(const char *str)
 {
-	unsigned long int	i;
+	unsigned long int			i;
 	static const char			*opcode_strings[] = {
 			[SA] = "sa", [SB] = "sb", [SS] = "ss",
 			[PA] = "pa", [PB] = "pb",
@@ -28,7 +28,7 @@ t_opcode	string2opcode(const char *str)
 			return (i);
 		++i;
 	}
-	return ERROR;
+	return (ERROR);
 }
 
 void	execute_operation(const t_opcode opcode, t_collection *collection)

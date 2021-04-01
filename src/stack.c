@@ -5,6 +5,7 @@
 #include "stack.h"
 #include "libft.h"
 #include "utils.h"
+#include "ft_printf.h"
 
 t_collection	*create_stacks(void)
 {
@@ -123,31 +124,36 @@ bool	stack_duplicate_check(const t_stack *stack, int item)
 	return (false);
 }
 
+static void	printf_wrapper(const int fd, const t_stacknode *node,
+						   int max_digits, const char *end)
+{
+	if (node)
+		ft_dprintf(fd, "%*d%s", max_digits, node->data, end);
+	else
+		ft_dprintf(fd, "%*c%s", max_digits, ' ', end);
+}
+
 void	print_stacks(const t_collection *stacks)
 {
 	int			fd;
+	int			field_width;
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 
 //	clearscreen();
+	fd = STDOUT_FILENO;
+	field_width = (int)stacks->max_amount_digits + 2;
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
-	fd = STDOUT_FILENO;
-	dprintf(fd, "\nA\t|\tB\n\n");
+	ft_dprintf(fd, "\n%*c|%*c\n\n", -field_width, 'A', field_width, 'B');
 	while (tmp_a || tmp_b)
 	{
+		printf_wrapper(fd, tmp_a, -field_width, "|");
+		printf_wrapper(fd, tmp_b, field_width, "\n");
 		if (tmp_a)
-		{
-			ft_putnbr_fd(tmp_a->data, fd);
 			tmp_a = tmp_a->prev;
-		}
-		ft_putstr_fd("\t|\t", fd);
 		if (tmp_b)
-		{
-			ft_putnbr_fd(tmp_b->data, fd);
 			tmp_b = tmp_b->prev;
-		}
-		ft_putchar_fd('\n', fd);
 	}
 	ft_putchar_fd('\n', fd);
 }
