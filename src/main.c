@@ -73,6 +73,11 @@ int	cleanup(t_collection *coll)
 	return (0);
 }
 
+void	read_input(t_collection *coll)
+{
+
+}
+
 int	main(int argc, char **argv)
 {
 	t_collection	*coll;

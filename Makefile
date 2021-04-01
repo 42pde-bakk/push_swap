@@ -1,5 +1,5 @@
 NAME = push_swap
-INCLUDE = -I ./libft -I ./includes
+INCLUDE = -I ./libft -I ./includes -Ignl -Ift_printf
 
 SRC_DIR = ./src
 OPERATIONS_DIR = $(SRC_DIR)/operations
@@ -29,12 +29,15 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) libft.a getnextline.a ft_printf.a
 	@echo -e "$(YELLOW)Making libft.a"
 	@make -sC ./libft
 	@echo -e "$(BLUE)Bundling"
-	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) $(INCLUDE)
 	@echo -e "$(PINK)Done $(RESET)"
+
+%.a: %
+	@echo -e "$(GREEN) Compiling file $< to $@ $(RESET)"
+	@make -sC @<
 
 %.o: %.c
 	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"

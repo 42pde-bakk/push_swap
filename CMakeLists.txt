@@ -18,4 +18,6 @@ add_executable(push_swap
         src/operations/reverse_rotate.c)
 
 include_directories(libft)
+include_directories(gnl)
+include_directories(ft_printf)
 include_directories(includes)
