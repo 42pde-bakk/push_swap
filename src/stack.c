@@ -30,9 +30,25 @@ void	delete_stack(t_stack *stack)
 	stack = NULL;
 }
 
-int	stack_is_empty(const t_stack *stack)
+bool	stack_is_empty(const t_stack *stack)
 {
 	return (stack->top == NULL);
+}
+
+bool	stack_is_sorted(const t_collection *coll)
+{
+	t_stacknode	*tmp;
+
+	if (!stack_is_empty(coll->b))
+		return (false);
+	tmp = coll->a->bottom;
+	while (tmp->next)
+	{
+		if (tmp->next->data < tmp->data)
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
 }
 
 static t_stacknode	*new_node(int data)
@@ -93,7 +109,7 @@ int	stack_peek(const t_stack *stack)
 	return (stack->top->data);
 }
 
-int	stack_duplicate_check(const t_stack *stack, int item)
+bool	stack_duplicate_check(const t_stack *stack, int item)
 {
 	t_stacknode	*tmp;
 
@@ -101,10 +117,10 @@ int	stack_duplicate_check(const t_stack *stack, int item)
 	while (tmp)
 	{
 		if (tmp->data == item)
-			return (1);
+			return (true);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (false);
 }
 
 void	print_stacks(const t_collection *stacks)
@@ -113,6 +129,7 @@ void	print_stacks(const t_collection *stacks)
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 
+//	clearscreen();
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
 	fd = STDOUT_FILENO;

@@ -18,11 +18,13 @@ typedef enum e_opcode
 	RR,
 	RRA,
 	RRB,
-	RRR
+	RRR,
+	ERROR
 }t_opcode;
 
 typedef void	(*t_operation)();
 
+t_opcode	string2opcode(const char *str);
 void	execute_operation(t_opcode opcode, t_collection *collection);
 
 void	sa(t_collection *collection);

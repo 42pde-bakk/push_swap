@@ -4,6 +4,7 @@
 
 #include "libft.h"
 #include "push_swap.h"
+#include "get_next_line.h"
 
 int	is_valid_arg(const char *s)
 {
@@ -75,7 +76,25 @@ int	cleanup(t_collection *coll)
 
 void	read_input(t_collection *coll)
 {
+	char		*line;
+	int			ret;
+	t_opcode	opcode;
 
+	ret = 1;
+	while (ret > 0 && stack_is_sorted(coll) == false)
+	{
+		ret = get_next_line(0, &line);
+		opcode = string2opcode(line);
+		if (opcode != ERROR)
+		{
+			execute_operation(opcode, coll);
+			print_stacks(coll);
+		}
+		else
+			ft_putendl_fd("Error. Bad instruction.", STDERR_FILENO);
+		free(line);
+		line = NULL;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -90,8 +109,7 @@ int	main(int argc, char **argv)
 	else
 		parse_array(coll, argv, 1);
 	print_stacks(coll);
-	execute_operation(RA, coll);
-	execute_operation(PB, coll);
-	print_stacks(coll);
+	read_input(coll);
+
 	return (cleanup(coll));
 }
