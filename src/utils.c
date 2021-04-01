@@ -4,6 +4,7 @@
 
 #include "utils.h"
 #include "libft.h"
+#include "limits.h"
 
 void	fatal_error(const char *s)
 {
@@ -24,4 +25,32 @@ unsigned int	amount_digits(int n)
 		n /= 10;
 	}
 	return (digits);
+}
+
+int	atoi_exit_on_error(const char *str)
+{
+	int			sign;
+	int			i;
+	long int	result;
+
+	i = 0;
+	result = 0;
+	sign = 1;
+	while (iswhitespace(str[i]))
+		++i;
+	if (str[i] == '-')
+	{
+		sign = -1;
+		++i;
+	}
+	else if (str[i] == '+')
+		++str;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = (10 * result) + (str[i] - '0');
+		if (result < INT_MIN || result > INT_MAX)
+			fatal_error("Error");
+		++i;
+	}
+	return (sign * (int)result);
 }

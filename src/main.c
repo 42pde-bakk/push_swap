@@ -31,7 +31,7 @@ void	parse_array(t_collection *coll, char **argv, int i)
 			delete_stack(coll->a);
 			fatal_error("Error");
 		}
-		item = ft_atoi(argv[i]);
+		item = atoi_exit_on_error(argv[i]);
 		digits_amount = amount_digits(item);
 		if (stack_duplicate_check(coll->a, item))
 		{

@@ -124,6 +124,7 @@ void	print_stacks(const t_collection *stacks)
 			ft_putnbr_fd(tmp_a->data, fd);
 			tmp_a = tmp_a->prev;
 		}
+		ft_putstr_fd("\t|\t", fd);
 		if (tmp_b)
 		{
 			ft_putnbr_fd(tmp_b->data, fd);
