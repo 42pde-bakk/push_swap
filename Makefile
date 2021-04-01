@@ -1,14 +1,16 @@
 NAME = push_swap
+INCLUDE = -I ./libft -I ./includes
 
-SRC_DIR = ./algo
-PRINTF_DIR = ./ft_printf
+SRC_DIR = ./src
+OPERATIONS_DIR = $(SRC_DIR)/operations
 
-SRC = main.c \
-	stack.c \
-	operations.c \
-	utils.c
+FILES = main stack utils
+OP_FILES = operations push swap rotate reverse_rotate
 
-FILES = $(addprefix $(SRC_DIR)/, $(SRC))
+SRCS = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES))) \
+		$(addprefix $(OPERATIONS_DIR)/, $(addsuffix .c, $(OP_FILES)))
+OBJS = $(SRCS:.c=.o)
+
 # COLORS
 PINK = \x1b[35;01m
 BLUE = \x1b[34;01m
@@ -18,24 +20,29 @@ RED = \x1b[31;01m
 WHITE = \x1b[31;37m
 RESET = \x1b[0m
 
-FLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 ifdef DEBUG
- FLAGS += -g -fsanitize=address
+ CFLAGS += -g -fsanitize=address
 else
- FLAGS += -Ofast
+ CFLAGS += -Ofast
 endif
 
 all: $(NAME)
 
-$(NAME): $(FILES)
+$(NAME): $(OBJS)
 	@echo -e "$(YELLOW)Making libft.a"
 	@make -sC ./libft
 	@echo -e "$(BLUE)Bundling"
-	@$(CC) $(FLAGS) $(FILES) libft/libft.a -o $(NAME) -I libft
+	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) $(INCLUDE)
 	@echo -e "$(PINK)Done"
+
+%.o: %.c
+	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
+	$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
 
 clean:
 	@/bin/rm -f *.o *~ *.gch
+	@/bin/rm -f $(OBJS)
 	@make clean -sC ./libft
 
 fclean: clean

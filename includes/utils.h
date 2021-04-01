@@ -7,7 +7,8 @@
 
 # include <stdlib.h>
 
-void	fatal_error(const char* s);
+void			fatal_error(const char* s);
+unsigned int	amount_digits(int n);
 
 
 #endif //PUSH_SWAP_UTILS_H

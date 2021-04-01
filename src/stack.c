@@ -6,25 +6,30 @@
 #include "libft.h"
 #include "utils.h"
 
-// function to create a stack of given capacity. It initializes size of
-// stack as 0
-t_stack	*create_stack()
+t_collection	*create_stacks()
 {
-	t_stack	*out;
+	t_stack			*a;
+	t_stack			*b;
+	t_collection	*out;
 
-	out = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	a = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	if (!a)
+		fatal_error("Error allocating memory for stack A");
+	b = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	if (!b)
+		fatal_error("Error allocating memory for stack B");
+	out = (t_collection *)ft_calloc(1, sizeof(t_collection));
 	if (!out)
-		fatal_error("Error allocating memory for new stack");
+		fatal_error("Error allocating memory for stack collection");
 	return (out);
 }
 
-void	*delete_stack(t_stack* stack)
+void	delete_stack(t_stack* stack)
 {
 	while (stack->size > 0)
 		stack_pop(stack);
 	free(stack);
 	stack = NULL;
-	return (NULL);
 }
 
 int	stack_is_empty(const t_stack *stack)
@@ -102,14 +107,14 @@ int	stack_duplicate_check(const t_stack* stack, int item)
 	return (0);
 }
 
-void	print_stacks(const t_stack *a, const t_stack *b)
+void	print_stacks(const t_collection *stacks)
 {
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 	int fd;
 
-	tmp_a = a->top;
-	tmp_b = b->top;
+	tmp_a = stacks->a->top;
+	tmp_b = stacks->b->top;
 	fd = STDOUT_FILENO;
 	dprintf(fd, "A\t|\tB\n");
 	while (tmp_a || tmp_b)
