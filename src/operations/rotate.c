@@ -8,6 +8,8 @@ static void	rotate(t_stack *stack)
 {
 	t_stacknode	*tmp;
 
+	if (stack_is_empty(stack) || stack->size == 1)
+		return ;
 	tmp = stack->top->prev;
 	stack->bottom->prev = stack->top;
 	stack->top->next = stack->bottom;
@@ -32,4 +34,3 @@ void	rr(t_collection *coll)
 	rotate(coll->a);
 	rotate(coll->b);
 }
-

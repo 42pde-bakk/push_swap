@@ -5,31 +5,36 @@
 #include "libft.h"
 #include "push_swap.h"
 
-int	is_valid_arg(const char* s) {
-	int i;
+int	is_valid_arg(const char *s)
+{
+	int	i;
 
 	i = 0;
 	while (s[i])
 	{
 		if (!(s[i] == '-' || s[i] == '+' || (s[i] >= '0' && s[i] <= '9')))
-			return (0);
+			return (false);
 		++i;
 	}
-	return (1);
+	return (true);
 }
 
-void	parse_array(t_collection *coll, char** argv, int i) {
+void	parse_array(t_collection *coll, char **argv, int i)
+{
 	int				item;
 	unsigned int	digits_amount;
 
-	while (argv[i]) {
-		if (!is_valid_arg(argv[i])) {
+	while (argv[i])
+	{
+		if (!is_valid_arg(argv[i]))
+		{
 			delete_stack(coll->a);
 			fatal_error("Error");
 		}
 		item = ft_atoi(argv[i]);
 		digits_amount = amount_digits(item);
-		if (stack_duplicate_check(coll->a, item)) {
+		if (stack_duplicate_check(coll->a, item))
+		{
 			delete_stack(coll->a);
 			fatal_error("Error");
 		}
@@ -38,6 +43,25 @@ void	parse_array(t_collection *coll, char** argv, int i) {
 		stack_push(coll->a, ft_atoi(argv[i]));
 		++i;
 	}
+}
+
+void	parse_split_array(t_collection *coll, char *s)
+{
+	char	**array;
+	int		i;
+
+	array = ft_split(s, ' ');
+	if (array == NULL)
+		fatal_error("Error");
+	parse_array(coll, array, 0);
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+	}
+	free(array);
+	array = NULL;
 }
 
 int	cleanup(t_collection *coll)
@@ -49,18 +73,20 @@ int	cleanup(t_collection *coll)
 	return (0);
 }
 
-int main(int argc, char** argv) {
+int	main(int argc, char **argv)
+{
 	t_collection	*coll;
+
 	coll = create_stacks();
 	if (argc == 1)
 		fatal_error("Error");
 	else if (argc == 2)
-		parse_array(coll, ft_split(argv[1], ' '), 0);
+		parse_split_array(coll, argv[1]);
 	else
 		parse_array(coll, argv, 1);
 	print_stacks(coll);
 	execute_operation(RA, coll);
-//	execute_operation(&push, "pb", stack_b, stack_a);
+	execute_operation(PB, coll);
 	print_stacks(coll);
 	return (cleanup(coll));
 }

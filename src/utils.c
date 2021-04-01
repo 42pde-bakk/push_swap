@@ -5,13 +5,14 @@
 #include "utils.h"
 #include "libft.h"
 
-void	fatal_error(const char* s)
+void	fatal_error(const char *s)
 {
 	ft_putendl_fd(s, 2);
 	exit(EXIT_FAILURE);
 }
 
-unsigned int amount_digits(int n) {
+unsigned int	amount_digits(int n)
+{
 	unsigned int	digits;
 
 	digits = 0;

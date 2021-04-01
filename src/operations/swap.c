@@ -6,10 +6,11 @@
 
 static void	swap(t_stack *stack)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = stack->top->data;
-	if (stack->size > 1) {
+	if (stack->size > 1)
+	{
 		stack->top->data = stack->top->prev->data;
 		stack->top->prev->data = tmp;
 	}
@@ -25,7 +26,8 @@ void	sb(t_collection *collection)
 	swap(collection->b);
 }
 
-void	ss(t_collection *collection) {
+void	ss(t_collection *collection)
+{
 	sa(collection);
 	sb(collection);
 }

@@ -7,7 +7,7 @@
 
 void	execute_operation(const t_opcode opcode, t_collection *collection)
 {
-	static const char	*op_stringcodes[] = {
+	static const char			*op_stringcodes[] = {
 			[SA] = "sa", [SB] = "sb", [SS] = "ss",
 			[PA] = "pa", [PB] = "pb",
 			[RA] = "ra", [RB] = "rb", [RR] = "rr",

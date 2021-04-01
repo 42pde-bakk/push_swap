@@ -34,7 +34,7 @@ $(NAME): $(OBJS)
 	@make -sC ./libft
 	@echo -e "$(BLUE)Bundling"
 	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) $(INCLUDE)
-	@echo -e "$(PINK)Done"
+	@echo -e "$(PINK)Done $(RESET)"
 
 %.o: %.c
 	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"

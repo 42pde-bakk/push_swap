@@ -8,6 +8,8 @@ static void	reverse_rotate(t_stack *stack)
 {
 	t_stacknode	*tmp;
 
+	if (stack_is_empty(stack) || stack->size == 1)
+		return ;
 	tmp = stack->bottom->next;
 	stack->top->next = stack->bottom;
 	stack->bottom->prev = stack->top;
