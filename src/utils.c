@@ -57,5 +57,5 @@ int	atoi_exit_on_error(const char *str)
 
 void	clearscreen(void)
 {
-	write(STDOUT_FILENO, "\e[1;1H\e[2J", 11);
+//	write(STDOUT_FILENO, "\e[1;1H\e[2J", 11);
 }

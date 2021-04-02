@@ -19,7 +19,7 @@ typedef enum e_opcode
 	RRA,
 	RRB,
 	RRR,
-	ERROR
+	ERROR,
 }t_opcode;
 
 typedef void	(*t_operation)();

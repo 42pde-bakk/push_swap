@@ -4,6 +4,7 @@
 
 #include "operations.h"
 #include "libft.h"
+#include "push_swap.h"
 
 static void	error(t_collection *coll)
 {
@@ -22,16 +23,26 @@ t_opcode	string2opcode(const char *str)
 	};
 
 	i = 0;
-	while (i < sizeof(opcode_strings))
+	if (ft_strlen(str) < 2 || ft_strlen(str) > 3)
+		return (ERROR);
+	while (i < sizeof(*opcode_strings))
 	{
-		if (ft_strncmp(str, opcode_strings[i], ft_strlen(str)) == 0)
+		if (!ft_strncmp(str, opcode_strings[i], ft_strlen(str)))
+		{
 			return (i);
+		}
 		++i;
 	}
 	return (ERROR);
 }
 
-void	execute_operation(const t_opcode opcode, t_collection *collection)
+#ifdef CHECKER
+static void	print_operation(const t_opcode opcode)
+{
+	(void)opcode;
+}
+#else
+static void	print_operation(const t_opcode opcode)
 {
 	static const char			*op_stringcodes[] = {
 			[SA] = "sa", [SB] = "sb", [SS] = "ss",
@@ -39,6 +50,13 @@ void	execute_operation(const t_opcode opcode, t_collection *collection)
 			[RA] = "ra", [RB] = "rb", [RR] = "rr",
 			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
 	};
+
+	ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
+}
+#endif
+
+void	execute_operation(const t_opcode opcode, t_collection *collection)
+{
 	static const t_operation	operations[] = {
 			[SA] = &sa, [SB] = &sb, [SS] = &ss,
 			[PA] = &pa, [PB] = &pb,
@@ -46,6 +64,6 @@ void	execute_operation(const t_opcode opcode, t_collection *collection)
 			[RRA] = &rra, [RRB] = &rrb, [RRR] = &rrr, [ERROR] = &error
 	};
 
-	ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
+	print_operation(opcode);
 	operations[opcode](collection);
 }

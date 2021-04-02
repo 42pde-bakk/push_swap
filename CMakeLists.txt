@@ -5,17 +5,20 @@ set(CMAKE_C_STANDARD 90)
 
 add_executable(push_swap
         src/main.c
-        src/stack.c
+        src/stack/stack.c
         src/utils.c
         includes/push_swap.h
         includes/utils.h
         includes/stack.h
         includes/operations.h
+        includes/checker.h
         src/operations/operations.c
         src/operations/swap.c
         src/operations/push.c
         src/operations/rotate.c
-        src/operations/reverse_rotate.c)
+        src/operations/reverse_rotate.c
+        src/checker/checker.c
+        src/stack/print_stacks.c src/stack/stack_operations.c src/stack/stack_checks.c src/parsing.c src/solver/bogosort.c includes/solver.h)
 
 include_directories(libft)
 include_directories(getnextline)
