@@ -6,5 +6,6 @@
 # define SOLVER_H
 
 void	bogosort(t_collection *collection);
+void	bubblesort(t_collection *collection);
 
 #endif //SOLVER_H

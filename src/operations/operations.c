@@ -51,7 +51,6 @@ static void	print_operation(const t_opcode opcode)
 			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
 	};
 
-	dprintf(2, "opcode is %d\n", opcode);
 	if (opcode != ERROR)
 		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
 }

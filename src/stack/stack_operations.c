@@ -63,3 +63,4 @@ int	stack_peek(const t_stack *stack)
 		return (INT_MIN);
 	return (stack->top->data);
 }
+
