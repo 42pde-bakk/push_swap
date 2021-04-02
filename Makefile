@@ -7,19 +7,21 @@ OPERATIONS_DIR = $(SRC_DIR)/operations
 CHECKER_DIR = $(SRC_DIR)/checker
 SOLVER_DIR = $(SRC_DIR)/solver
 
-FILES = main utils parsing
+UTILS = utils parsing
 STACK_FILES = stack print_stacks stack_checks stack_operations
 OP_FILES = operations push swap rotate reverse_rotate
 CHECKER_FILES = checker
-SOLVER_FILES = bogosort
+SOLVER_FILES = main bogosort
 
-SRCS = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES))) \
+SRCS = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS))) \
 		$(addprefix $(STACK_DIR)/, $(addsuffix .c, $(STACK_FILES))) \
-		$(addprefix $(OPERATIONS_DIR)/, $(addsuffix .c, $(OP_FILES))) \
-		$(addprefix $(CHECKER_DIR)/, $(addsuffix .c, $(CHECKER_FILES))) \
-		$(addprefix $(SOLVER_DIR)/, $(addsuffix .c, $(SOLVER_FILES)))
+		$(addprefix $(OPERATIONS_DIR)/, $(addsuffix .c, $(OP_FILES)))
+CHECKER_SRCS = $(addprefix $(CHECKER_DIR)/, $(addsuffix .c, $(CHECKER_FILES)))
+SOLVER_SRCS = $(addprefix $(SOLVER_DIR)/, $(addsuffix .c, $(SOLVER_FILES)))
 
 OBJS = $(SRCS:.c=.o)
+CHECKER_OBJS = $(CHECKER_SRCS:.c=.o)
+SOLVER_OBJS = $(SOLVER_SRCS:.c=.o)
 
 # COLORS
 PINK = \x1b[35;01m
@@ -39,16 +41,15 @@ endif
 
 all: $(NAME)
 
-$(word 1, $(NAME)): $(OBJS) libft.a getnextline.a ft_printf.a
-	@echo "building push_swap"
-	@$(CC) $(CFLAGS) -D CHECKER=0 $(OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
+$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
+	echo "building push_swap"
+	@$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
 	@echo -e "$(PINK)Done $(RESET)"
 
-$(word 2, $(NAME)): $(OBJS) libft.a getnextline.a ft_printf.a
+$(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
 	@echo "building checker"
-	@$(CC) $(CFLAGS) -D CHECKER=1 $(OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
 	@echo -e "$(PINK)Done $(RESET)"
-
 
 %.a: %
 	@#echo -e "$(GREEN)Compiling $@ in directory $< $(RESET)"
@@ -60,7 +61,7 @@ $(word 2, $(NAME)): $(OBJS) libft.a getnextline.a ft_printf.a
 
 clean:
 	@/bin/rm -f *.o *~ *.gch
-	@/bin/rm -f $(OBJS)
+	@/bin/rm -f $(OBJS) $(CHECKER_OBJS) $(SOLVER_OBJS)
 	@make clean -sC libft
 	@make clean -sC getnextline
 	@make clean -sC ft_printf

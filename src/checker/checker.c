@@ -2,6 +2,7 @@
 // Created by peerdb on 02-04-21.
 //
 
+#include "push_swap.h"
 #include "libft.h"
 #include "get_next_line.h"
 #include "stack.h"
@@ -25,18 +26,32 @@ void	checker(t_collection *coll)
 	while (get_next_line(0, &line) > 0)
 	{
 		opcode = string2opcode(line);
+		execute_operation(opcode, coll);
 		if (opcode != ERROR)
 		{
 			++op_count;
-			execute_operation(opcode, coll);
 			print_stacks(coll);
 		}
-		else if (ft_strlen(line) > 0)
-			ft_putendl_fd("Error. Bad instruction.", STDERR_FILENO);
 		clearline(&line);
 		if (stack_is_sorted(coll))
 			break;
 	}
 	clearline(&line);
 	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", is_sorted_msg[(int)stack_is_sorted(coll)], op_count);
+}
+
+int	main(int argc, char **argv)
+{
+	t_collection	*coll;
+
+	coll = create_stacks();
+	if (argc == 1)
+		fatal_error("Error");
+	else if (argc == 2)
+		parse_split_array(coll, argv[1]);
+	else
+		parse_array(coll, argv, 1);
+	print_stacks(coll);
+	checker(coll);
+	return (cleanup(coll));
 }

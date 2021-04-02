@@ -8,9 +8,9 @@ static void	swap(t_stack *stack)
 {
 	int	tmp;
 
-	tmp = stack->top->data;
 	if (stack->size > 1)
 	{
+		tmp = stack->top->data;
 		stack->top->data = stack->top->prev->data;
 		stack->top->prev->data = tmp;
 	}

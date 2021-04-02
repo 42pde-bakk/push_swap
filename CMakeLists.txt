@@ -4,7 +4,7 @@ project(push_swap C)
 set(CMAKE_C_STANDARD 90)
 
 add_executable(push_swap
-        src/main.c
+        src/solver/main.c
         src/stack/stack.c
         src/utils.c
         includes/push_swap.h

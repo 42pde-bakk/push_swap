@@ -9,7 +9,7 @@
 static void	error(t_collection *coll)
 {
 	(void)coll;
-	ft_putendl_fd("Error. bad instruction", STDERR_FILENO);
+	ft_putendl_fd("Error. Bad instruction", STDERR_FILENO);
 }
 
 t_opcode	string2opcode(const char *str)
@@ -25,7 +25,7 @@ t_opcode	string2opcode(const char *str)
 	i = 0;
 	if (ft_strlen(str) < 2 || ft_strlen(str) > 3)
 		return (ERROR);
-	while (i < sizeof(*opcode_strings))
+	while (i < sizeof(opcode_strings) / sizeof(*opcode_strings))
 	{
 		if (!ft_strncmp(str, opcode_strings[i], ft_strlen(str)))
 		{
@@ -51,7 +51,9 @@ static void	print_operation(const t_opcode opcode)
 			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
 	};
 
-	ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
+	dprintf(2, "opcode is %d\n", opcode);
+	if (opcode != ERROR)
+		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
 }
 #endif
 

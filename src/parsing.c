@@ -61,7 +61,16 @@ void	parse_split_array(t_collection *coll, char *s)
 	{
 		free(array[i]);
 		array[i] = NULL;
+		++i;
 	}
 	free(array);
 	array = NULL;
+}
+
+int	cleanup(t_collection *coll)
+{
+	delete_stack(coll->a);
+	delete_stack(coll->b);
+	free(coll);
+	return (0);
 }
