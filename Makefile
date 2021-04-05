@@ -1,5 +1,5 @@
 NAME = push_swap checker
-INCLUDE = -I ./libft/include -I ./includes -Igetnextline/include -Ift_printf/include
+INCLUDE = -I ./libft/include -I ./include -Igetnextline/include -Ift_printf/include
 
 SRC_DIR = ./src
 STACK_DIR = $(SRC_DIR)/stack
@@ -43,14 +43,12 @@ endif
 all: $(NAME)
 
 $(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
-	@printf "building push_swap\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
-	@printf "$(PINK)Done $(RESET)\n"
+	@printf "$(PINK)Done building push_swap $(RESET)\n"
 
 $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
-	@printf "building checker\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
-	@printf "$(PINK)Done $(RESET)\n"
+	@printf "$(PINK)Done building checker $(RESET)\n"
 
 %.a: %
 #	@echo -e "$(GREEN)Compiling $@ in directory $< $(RESET)"
@@ -67,7 +65,9 @@ clean:
 	@make clean -sC getnextline
 	@make clean -sC ft_printf
 
-fclean: clean
+fclean:
+	@/bin/rm -f *.o *~ *.gch
+	@/bin/rm -f $(OBJS) $(CHECKER_OBJS) $(SOLVER_OBJS)
 	@make fclean -sC libft
 	@make fclean -sC getnextline
 	@make fclean -sC ft_printf
