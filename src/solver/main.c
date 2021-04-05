@@ -17,6 +17,6 @@ int	main(int argc, char **argv)
 		parse_split_array(coll, argv[1]);
 	else
 		parse_array(coll, argv, 1);
-	bubblesort(coll);
+	bogosort(coll);
 	return (cleanup(coll));
 }
