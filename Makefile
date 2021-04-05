@@ -1,5 +1,5 @@
 NAME = push_swap checker
-INCLUDE = -I ./libft -I ./includes -Igetnextline -Ift_printf
+INCLUDE = -I ./libft/include -I ./includes -Igetnextline/include -Ift_printf/include
 
 SRC_DIR = ./src
 STACK_DIR = $(SRC_DIR)/stack
@@ -38,26 +38,27 @@ ifdef DEBUG
 else
  CFLAGS += -Ofast
 endif
+#export DEBUG
 
 all: $(NAME)
 
 $(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
-	echo "building push_swap"
+	@printf "building push_swap\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
-	@echo -e "$(PINK)Done $(RESET)"
+	@printf "$(PINK)Done $(RESET)\n"
 
 $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
-	@echo "building checker"
+	@printf "building checker\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
-	@echo -e "$(PINK)Done $(RESET)"
+	@printf "$(PINK)Done $(RESET)\n"
 
 %.a: %
-	@#echo -e "$(GREEN)Compiling $@ in directory $< $(RESET)"
+#	@echo -e "$(GREEN)Compiling $@ in directory $< $(RESET)"
 	@make -sC $<
 
 %.o: %.c
-	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
-	$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
+#	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
+	@$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
 
 clean:
 	@/bin/rm -f *.o *~ *.gch
