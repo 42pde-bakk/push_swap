@@ -53,3 +53,4 @@ dkms.conf
 cmake-build-debug
 push_swap
 checker
+.idea/
