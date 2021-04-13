@@ -26,7 +26,7 @@ add_executable(push_swap
 		include/solver.h
 		)
 
-include_directories(libft)
-include_directories(getnextline)
-include_directories(ft_printf)
-include_directories(includes)
+include_directories(libft/include)
+include_directories(getnextline/include)
+include_directories(ft_printf/include)
+include_directories(include)

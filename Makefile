@@ -38,16 +38,17 @@ ifdef DEBUG
 else
  CFLAGS += -Ofast
 endif
-#export DEBUG
+SHELL := /bin/bash
+export SHELL
 
 all: $(NAME)
 
 $(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
-	@$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
 	@printf "$(PINK)Done building push_swap $(RESET)\n"
 
 $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
-	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
 	@printf "$(PINK)Done building checker $(RESET)\n"
 
 %.a: %
@@ -61,13 +62,8 @@ $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
 clean:
 	@/bin/rm -f *.o *~ *.gch
 	@/bin/rm -f $(OBJS) $(CHECKER_OBJS) $(SOLVER_OBJS)
-	@make clean -sC libft
-	@make clean -sC getnextline
-	@make clean -sC ft_printf
 
-fclean:
-	@/bin/rm -f *.o *~ *.gch
-	@/bin/rm -f $(OBJS) $(CHECKER_OBJS) $(SOLVER_OBJS)
+fclean: clean
 	@make fclean -sC libft
 	@make fclean -sC getnextline
 	@make fclean -sC ft_printf
