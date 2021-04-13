@@ -4,21 +4,27 @@ project(push_swap C)
 set(CMAKE_C_STANDARD 90)
 
 add_executable(push_swap
-        src/solver/main.c
-        src/stack/stack.c
-        src/utils.c
-        includes/push_swap.h
-        includes/utils.h
-        includes/stack.h
-        includes/operations.h
-        includes/checker.h
-        src/operations/operations.c
-        src/operations/swap.c
-        src/operations/push.c
-        src/operations/rotate.c
-        src/operations/reverse_rotate.c
-        src/checker/checker.c
-        src/stack/print_stacks.c src/stack/stack_operations.c src/stack/stack_checks.c src/parsing.c src/solver/bogosort.c includes/solver.h)
+		src/solver/main.c
+		src/stack/stack.c
+		src/utils.c
+		include/push_swap.h
+		include/utils.h
+		include/stack.h
+		include/operations.h
+		include/checker.h
+		src/operations/operations.c
+		src/operations/swap.c
+		src/operations/push.c
+		src/operations/rotate.c
+		src/operations/reverse_rotate.c
+		src/checker/checker.c
+		src/stack/print_stacks.c
+		src/stack/stack_operations.c
+		src/stack/stack_checks.c
+		src/parsing.c
+		src/solver/bogosort.c
+		include/solver.h
+		)
 
 include_directories(libft)
 include_directories(getnextline)
