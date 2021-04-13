@@ -15,8 +15,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: make
       run: |
-        ls include
-        ls libft/include
+        ls include libft/include
+        ls
         make
     - name: make re
       run: make re
