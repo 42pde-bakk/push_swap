@@ -1,5 +1,5 @@
 NAME = push_swap checker
-INCLUDE = -I ./libft/include -I ./include -Igetnextline/include -Ift_printf/include
+INCLUDE = -Iinclude -Ilibft/include -Igetnextline/include -Ift_printf/include
 
 SRC_DIR = ./src
 STACK_DIR = $(SRC_DIR)/stack
