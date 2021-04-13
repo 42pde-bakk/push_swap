@@ -57,7 +57,7 @@ $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
 
 %.o: %.c
 #	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
-	@$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
+	$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
 
 clean:
 	@/bin/rm -f *.o *~ *.gch
