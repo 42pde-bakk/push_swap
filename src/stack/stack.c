@@ -29,3 +29,23 @@ void	delete_stack(t_stack *stack)
 	free(stack);
 	stack = NULL;
 }
+
+t_collection *copy_stacks(const t_collection *stack) {
+	t_collection	*out;
+	t_stacknode		*tmp_old;
+
+	out = create_stacks();
+	tmp_old = stack->a->bottom;
+	while (tmp_old)
+	{
+		stack_push(out->a, tmp_old->data);
+		tmp_old = tmp_old->next;
+	}
+	tmp_old = stack->b->bottom;
+	while (tmp_old)
+	{
+		stack_push(out->b, tmp_old->data);
+		tmp_old = tmp_old->next;
+	}
+	return (out);
+}

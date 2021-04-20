@@ -5,22 +5,7 @@
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 # include "stack.h"
-
-typedef enum e_opcode
-{
-	SA,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR,
-	ERROR,
-}t_opcode;
+# include "opcode.h"
 
 typedef void	(*t_operation)();
 

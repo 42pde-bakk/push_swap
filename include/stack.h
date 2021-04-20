@@ -8,6 +8,7 @@
 # include <limits.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include "opcode.h"
 
 typedef struct s_stacknode
 {
@@ -31,7 +32,9 @@ typedef struct s_collection
 }t_collection;
 
 t_collection	*create_stacks(void);
+t_collection	*copy_stacks(const t_collection *stack);
 void			delete_stack(t_stack *stack);
+int				get_node_value(const t_stacknode *node);
 bool			stack_is_sorted(const t_collection *coll);
 bool			stack_duplicate_check(const t_stack *stack, int item);
 bool			stack_is_empty(const t_stack *stack);

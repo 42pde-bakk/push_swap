@@ -23,7 +23,7 @@ void	print_stacks(const t_collection *stacks)
 	t_stacknode	*tmp_b;
 
 //	clearscreen();
-	fd = STDOUT_FILENO;
+	fd = STDERR_FILENO;
 	field_width = (int)stacks->max_amount_digits + 2;
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;

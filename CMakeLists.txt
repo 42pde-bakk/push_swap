@@ -24,7 +24,7 @@ add_executable(push_swap
 		src/parsing.c
 		src/solver/bogosort.c
 		include/solver.h
-		)
+		src/solver/bruteforce.c include/vector.h src/vector/vector.c include/opcode.h)
 
 include_directories(libft/include)
 include_directories(getnextline/include)
