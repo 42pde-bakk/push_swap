@@ -103,7 +103,7 @@ void	indiansort(t_collection *coll)
 	while (!sort_is_done(coll))
 	{
 		steps_to_max = get_steps_to_max_elem(coll);
-		dprintf(2, "steps to max is %d\n", steps_to_max);
+//		dprintf(2, "steps to max is %d\n", steps_to_max);
 		if (coll->b->size && stack_is_sorted(coll->a, 'a') && stack_is_sorted(coll->b, 'b')) {
 			execute_operation(PA, coll);
 		}
@@ -118,6 +118,6 @@ void	indiansort(t_collection *coll)
 		}
 //			execute_operation(RA, coll);
 //		print_stacks(coll);
-		sleep(1);
+//		sleep(1);
 	}
 }
