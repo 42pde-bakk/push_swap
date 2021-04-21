@@ -33,11 +33,11 @@ void	checker(t_collection *coll)
 			print_stacks(coll);
 		}
 		clearline(&line);
-		if (stack_is_sorted(coll))
+		if (sort_is_done(coll))
 			break;
 	}
 	clearline(&line);
-	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", is_sorted_msg[(int)stack_is_sorted(coll)], op_count);
+	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", is_sorted_msg[(int)sort_is_done(coll)], op_count);
 }
 
 int	main(int argc, char **argv)

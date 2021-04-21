@@ -9,7 +9,7 @@
 
 void	bogosort(t_collection *collection)
 {
-	while (!stack_is_sorted(collection))
+	while (!sort_is_done(collection))
 	{
 		execute_operation(rand() %  RRR, collection);
 	}
@@ -71,34 +71,53 @@ bool	check_pushes(t_collection *coll)
 	return (false);
 }
 
-static int	get_max_element(const t_collection *coll)
+static int	get_steps_to_max_elem(const t_collection *coll)
 {
 	t_stacknode *tmp;
+	int			steps;
+	int			max;
+	int			i;
 
-	tmp = coll->a->bottom;
-	int max = tmp->data;
+	tmp = coll->a->top;
+	max = tmp->data;
+	steps = 0;
+	i = 0;
 	while (tmp) {
-		if (tmp->data > max)
+		if (tmp->data > max) {
 			max = tmp->data;
-		tmp = tmp->next;
+			steps = i;
+		}
+		tmp = tmp->prev;
+		++i;
 	}
-	return (max);
+	if ((size_t)steps > coll->a->size / 2)
+		steps *= -1;
+	return (steps);
 }
 
 void	indiansort(t_collection *coll)
 {
-	print_stacks(coll);
-	while (!stack_is_sorted(coll))
+	int	steps_to_max;
+
+//	print_stacks(coll);
+	while (!sort_is_done(coll))
 	{
-		if (coll->a->size > 0 && coll->a->top->data == get_max_element(coll))
+		steps_to_max = get_steps_to_max_elem(coll);
+		dprintf(2, "steps to max is %d\n", steps_to_max);
+		if (coll->b->size && stack_is_sorted(coll->a, 'a') && stack_is_sorted(coll->b, 'b')) {
+			execute_operation(PA, coll);
+		}
+		else if (coll->a->size > 0 && steps_to_max == 0)
 			execute_operation(PB, coll);
 		else
-			execute_operation(RA, coll);
-		print_stacks(coll);
-		sleep(1);
-		if (coll->a->size == 0) {
-			while (coll->b->size)
-				execute_operation(PA, coll);
+		{
+			if (steps_to_max < 0)
+				execute_operation(RRA, coll);
+			else
+				execute_operation(RA, coll);
 		}
+//			execute_operation(RA, coll);
+//		print_stacks(coll);
+		sleep(1);
 	}
 }
