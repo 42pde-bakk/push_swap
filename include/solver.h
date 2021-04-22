@@ -8,4 +8,6 @@
 void	bogosort(t_collection *collection);
 void	indiansort(t_collection *collection);
 
+void	execute_and_print(t_opcode op, t_collection *coll);
+
 #endif //SOLVER_H

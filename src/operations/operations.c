@@ -4,7 +4,6 @@
 
 #include "operations.h"
 #include "libft.h"
-#include "push_swap.h"
 
 static void	error(t_collection *coll)
 {
@@ -36,27 +35,7 @@ t_opcode	string2opcode(const char *str)
 	return (ERROR);
 }
 
-#ifdef CHECKER
-static void	print_operation(const t_opcode opcode)
-{
-	(void)opcode;
-}
-#else
-static void	print_operation(const t_opcode opcode)
-{
-	static const char			*op_stringcodes[] = {
-			[SA] = "sa", [SB] = "sb", [SS] = "ss",
-			[PA] = "pa", [PB] = "pb",
-			[RA] = "ra", [RB] = "rb", [RR] = "rr",
-			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
-	};
-
-	if (opcode != ERROR)
-		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
-}
-#endif
-
-void	execute_operation(const t_opcode opcode, t_collection *collection)
+void	execute_operation(t_opcode opcode, t_collection *collection)
 {
 	static const t_operation	operations[] = {
 			[SA] = &sa, [SB] = &sb, [SS] = &ss,
@@ -65,6 +44,5 @@ void	execute_operation(const t_opcode opcode, t_collection *collection)
 			[RRA] = &rra, [RRB] = &rrb, [RRR] = &rrr, [ERROR] = &error
 	};
 
-	print_operation(opcode);
 	operations[opcode](collection);
 }

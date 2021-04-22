@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 		parse_split_array(coll, argv[1]);
 	else
 		parse_array(coll, argv, 1);
-	print_stacks(coll);
+//	print_stacks(coll);
 	checker(coll);
 	return (cleanup(coll));
 }

@@ -4,6 +4,7 @@
 
 #include "stack.h"
 #include "operations.h"
+#include "solver.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -11,7 +12,7 @@ void	bogosort(t_collection *collection)
 {
 	while (!sort_is_done(collection))
 	{
-		execute_operation(rand() %  RRR, collection);
+		execute_operation(rand() % RRR, collection);
 	}
 }
 
@@ -48,11 +49,11 @@ bool	check_rotations(t_collection *coll)
 	if (coll->b->size > 1 && coll->b->top->data < coll->b->bottom->data)
 		rot_b = true;
 	if (rot_a && rot_b)
-		execute_operation(RR, coll);
+		execute_and_print(RR, coll);
 	else if (rot_a)
-		execute_operation(RA, coll);
+		execute_and_print(RA, coll);
 	else if (rot_b)
-		execute_operation(RB, coll);
+		execute_and_print(RB, coll);
 	return (rot_a || rot_b);
 }
 
@@ -60,12 +61,12 @@ bool	check_pushes(t_collection *coll)
 {
 	if (op_is_possible(coll, PA) && (coll->a->size == 0 || coll->b->top->data < coll->a->top->data))
 	{
-		execute_operation(PA, coll);
+		execute_and_print(PA, coll);
 		return (true);
 	}
 	if (op_is_possible(coll, PB) && (coll->b->size == 0 || coll->a->top->data < coll->b->top->data))
 	{
-		execute_operation(PB, coll);
+		execute_and_print(PB, coll);
 		return (true);
 	}
 	return (false);
@@ -105,18 +106,18 @@ void	indiansort(t_collection *coll)
 		steps_to_max = get_steps_to_max_elem(coll);
 //		dprintf(2, "steps to max is %d\n", steps_to_max);
 		if (coll->b->size && stack_is_sorted(coll->a, 'a') && stack_is_sorted(coll->b, 'b')) {
-			execute_operation(PA, coll);
+			execute_and_print(PA, coll);
 		}
 		else if (coll->a->size > 0 && steps_to_max == 0)
-			execute_operation(PB, coll);
+			execute_and_print(PB, coll);
 		else
 		{
 			if (steps_to_max < 0)
-				execute_operation(RRA, coll);
+				execute_and_print(RRA, coll);
 			else
-				execute_operation(RA, coll);
+				execute_and_print(RA, coll);
 		}
-//			execute_operation(RA, coll);
+//			execute_and_print(RA, coll);
 //		print_stacks(coll);
 //		sleep(1);
 	}
