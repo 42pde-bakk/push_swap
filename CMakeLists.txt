@@ -21,8 +21,8 @@ add_executable(push_swap
 		src/stack/print_stacks.c
 		src/stack/stack_operations.c
 		src/stack/stack_checks.c
-		src/parsing.c
 		src/solver/sort.c
+		src/parsing.c
 		include/solver.h
 		include/opcode.h
 		src/solver/solving_utils.c)

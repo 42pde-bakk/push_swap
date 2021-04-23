@@ -43,17 +43,16 @@ export SHELL
 
 all: $(NAME)
 
-$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf/libftprintf.a
-	$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a libftprintf.a $(INCLUDE) -o $@
+$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
+	$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a $(INCLUDE) -o $@
 	@printf "$(PINK)Done building push_swap $(RESET)\n"
 
-$(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf/libftprintf.a
-	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a libftprintf.a $(INCLUDE) -o $@
+$(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
+	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a $(INCLUDE) -o $@
 	@printf "$(PINK)Done building checker $(RESET)\n"
 
 %.a: %
 #	@echo -e "$(GREEN)Compiling $@ in directory $< $(RESET)"
-	echo "< is " $< " ^ is " $^ " @ is " $@
 	@make -sC $<
 	cp $</$@ .
 
