@@ -1,5 +1,5 @@
 NAME = push_swap checker
-INCLUDE = -Iinclude -Ilibft/include -Igetnextline/include -Ift_printf/include
+INCLUDE = -Iinclude -Ilibft/include -Igetnextline/include -Ift_printf/include -Ilibc_vector/include
 
 SRC_DIR = ./src
 STACK_DIR = $(SRC_DIR)/stack
@@ -11,7 +11,7 @@ UTILS = utils parsing
 STACK_FILES = stack print_stacks stack_checks stack_operations
 OP_FILES = operations push swap rotate reverse_rotate
 CHECKER_FILES = checker
-SOLVER_FILES = main sort solving_utils
+SOLVER_FILES = main insertion_sort solving_utils
 
 SRCS = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS))) \
 		$(addprefix $(STACK_DIR)/, $(addsuffix .c, $(STACK_FILES))) \
@@ -22,6 +22,7 @@ SOLVER_SRCS = $(addprefix $(SOLVER_DIR)/, $(addsuffix .c, $(SOLVER_FILES)))
 OBJS = $(SRCS:.c=.o)
 CHECKER_OBJS = $(CHECKER_SRCS:.c=.o)
 SOLVER_OBJS = $(SOLVER_SRCS:.c=.o)
+LIBS = libft.a getnextline.a ft_printf.a libc_vector.a
 
 # COLORS
 PINK = \x1b[35;01m
@@ -43,12 +44,12 @@ export SHELL
 
 all: $(NAME)
 
-$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
-	$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a $(INCLUDE) -o $@
+$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(SOLVER_OBJS) $(LIBS) -o $@
 	@printf "$(PINK)Done building push_swap $(RESET)\n"
 
 $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
-	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a $(INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(CHECKER_OBJS) $(LIBS) -o $@
 	@printf "$(PINK)Done building checker $(RESET)\n"
 
 %.a: %
@@ -57,7 +58,7 @@ $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
 	cp $</$@ .
 
 %.o: %.c
-#	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
+#	echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
 	$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
 
 clean:
@@ -68,6 +69,7 @@ fclean: clean
 	@make fclean -sC libft
 	@make fclean -sC getnextline
 	@make fclean -sC ft_printf
-	/bin/rm -f $(NAME) libft.a getnextline.a libftprintf.a
+	@make fclean -sC libc_vector
+	/bin/rm -f $(NAME) libft.a getnextline.a ft_printf.a libc_vector.a
 
 re: fclean all

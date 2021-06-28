@@ -3,31 +3,14 @@ project(push_swap C)
 
 set(CMAKE_C_STANDARD 90)
 
-add_executable(push_swap
-		src/solver/main.c
-		src/stack/stack.c
-		src/utils.c
-		include/push_swap.h
-		include/utils.h
-		include/stack.h
-		include/operations.h
-		include/checker.h
-		src/operations/operations.c
-		src/operations/swap.c
-		src/operations/push.c
-		src/operations/rotate.c
-		src/operations/reverse_rotate.c
-		src/checker/checker.c
-		src/stack/print_stacks.c
-		src/stack/stack_operations.c
-		src/stack/stack_checks.c
-		src/solver/sort.c
-		src/parsing.c
-		include/solver.h
-		include/opcode.h
-		src/solver/solving_utils.c)
+file(GLOB Dir1_Sources RELATIVE "src" "*.c")
+file(GLOB solver_files RELATIVE "src/solver" "*.c")
+file(GLOB Dir1_Headers RELATIVE "include" "*.h")
+
+add_executable(push_swap ${Dir1_Sources} ${Dir1_Headers} ${solver_files})
 
 include_directories(libft/include)
+include_directories(libc_vector/include)
 include_directories(getnextline/include)
 include_directories(ft_printf/include)
 include_directories(include)
