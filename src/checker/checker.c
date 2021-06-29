@@ -34,10 +34,11 @@ void	checker(t_collection *coll)
 		}
 		clearline(&line);
 		if (sort_is_done(coll))
-			break;
+			break ;
 	}
 	clearline(&line);
-	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", is_sorted_msg[(int)sort_is_done(coll)], op_count);
+	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", \
+	is_sorted_msg[(int)sort_is_done(coll)], op_count);
 }
 
 int	main(int argc, char **argv)
