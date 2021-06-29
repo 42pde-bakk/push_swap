@@ -1,13 +1,22 @@
 cmake_minimum_required(VERSION 3.17)
 project(push_swap C)
-
 set(CMAKE_C_STANDARD 90)
 
-file(GLOB Dir1_Sources RELATIVE "src" "*.c")
-file(GLOB solver_files RELATIVE "src/solver" "*.c")
-file(GLOB Dir1_Headers RELATIVE "include" "*.h")
+file(GLOB source_files "src/*.c")
+file(GLOB checker_files "src/checker/*.c")
+file(GLOB operations_files "src/operations/*.c")
+file(GLOB solver_files "src/solver/*.c")
+file(GLOB stack_files "src/stack/*.c")
+file(GLOB header_files "include/*.h")
 
-add_executable(push_swap ${Dir1_Sources} ${Dir1_Headers} ${solver_files})
+add_executable(push_swap
+		${source_files}
+		${checker_files}
+		${operations_files}
+		${solver_files}
+		${stack_files}
+		${header_files}
+)
 
 include_directories(libft/include)
 include_directories(libc_vector/include)
