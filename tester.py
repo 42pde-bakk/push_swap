@@ -10,7 +10,9 @@ DEFAULT_AMOUNT = 4
 
 def create_array(args):
 	if len(args) == 1 and type(args[0]) == int:
+		print("int")
 		amount_nbs = args[0]
+		print(f'amount_nbs is {amount_nbs}')
 		my_nbs = set()
 		for i in range(amount_nbs):
 			my_nbs.add(random.randint(0, 10000))
@@ -45,6 +47,7 @@ def assert_checker_outcome(test_output, desired_outcome):
 
 def tester(*args) -> tuple:
 	arg = create_array(args)
+	print(arg)
 	p1 = subprocess.Popen(['./push_swap'] + arg, stdout=subprocess.PIPE)
 	p2 = subprocess.Popen(['./checker'] + arg, stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output = p2.stdout.read().decode('ascii')
@@ -52,9 +55,7 @@ def tester(*args) -> tuple:
 	split_output = output.split()
 
 	# print(f'errput is {errput}')
-	print(f'output is {output}')
-
-	return split_output[0][1:-1], int(split_output[2])
+	print(f'output is "{output}"')
 
 
 def assert_outcome(test_input, desired_outcome):
@@ -75,11 +76,14 @@ def moulinette(argv):
 	# except AssertionError as e:
 	# 	print(f'Test failed because {e}, final score is {score}')
 
-	print(tester(1043, 6630, 239, 4551, 9159))
-	print(tester(1750, 9715, 3048, 3453, 9149))
-	print(tester(8, 5, 6, 3, 2, 1))
-	print(tester(5))
-	print(tester(27))
+	# print(tester(1043, 6630, 239, 4551, 9159))
+	# print(tester(1750, 9715, 3048, 3453, 9149))
+	# print(tester(8, 5, 6, 3, 2, 1))
+	# print(tester(5))
+	# print(tester(27))
+	for i in range(1, len(argv)):
+		print(f'sys.argv[{i}] is {argv[i]}')
+		tester(int(argv[i]))
 
 
 if __name__ == "__main__":

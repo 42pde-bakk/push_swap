@@ -35,6 +35,22 @@ void	stack_push(t_stack *stack, int item)
 	stack->size++;
 }
 
+void	stack_push_under(t_stack *stack, int item)
+{
+	t_stacknode	*node;
+
+	node = new_node(item);
+	if (stack->size == 0)
+		stack->top = node;
+	else
+	{
+		stack->bottom->prev = node;
+		node->next = stack->bottom;
+	}
+	stack->bottom = node;
+	stack->size++;
+}
+
 // Function to remove an item from stack. It decreases size by 1
 
 int	stack_pop(t_stack *stack)

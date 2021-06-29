@@ -5,7 +5,6 @@
 #include "operations.h"
 #include "libft.h"
 
-
 static void	print_operation(const t_opcode opcode)
 {
 	static const char			*op_stringcodes[] = {

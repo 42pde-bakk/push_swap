@@ -2,8 +2,8 @@
 // Created by peerdebakker on 13-04-21.
 //
 
-#ifndef PUSH_SWAP_OPCODE_H
-#define PUSH_SWAP_OPCODE_H
+#ifndef OPCODE_H
+# define OPCODE_H
 
 typedef enum e_opcode
 {
@@ -21,4 +21,4 @@ typedef enum e_opcode
 	ERROR
 }t_opcode;
 
-#endif //PUSH_SWAP_OPCODE_H
+#endif //OPCODE_H

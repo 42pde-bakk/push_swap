@@ -235,27 +235,27 @@ void	indiansort(t_collection *coll)
 	sort_b(coll);
 	stack_b_on_a(coll);
 	return;
-	while (!sort_is_done(coll))
-	{
-		steps_to_max = get_steps_to_max_elem(coll);
-//		dprintf(2, "steps to max is %d\n", steps_to_max);
-		if (coll->b->size && stack_is_sorted(coll->a, 'a') && stack_is_sorted(coll->b, 'b')) {
-			execute_and_print(PA, coll);
-		}
-		else if (coll->a->size > 0 && steps_to_max == 0)
-			execute_and_print(PB, coll);
-		else
-		{
-			if (makes_sense_to_swap(coll)) {
-
-			}
-			else if (steps_to_max < 0)
-				execute_and_print(RRA, coll);
-			else
-				execute_and_print(RA, coll);
-		}
+//	while (!sort_is_done(coll))
+//	{
+//		steps_to_max = get_steps_to_max_elem(coll);
+////		dprintf(2, "steps to max is %d\n", steps_to_max);
+//		if (coll->b->size && stack_is_sorted(coll->a, 'a') && stack_is_sorted(coll->b, 'b')) {
+//			execute_and_print(PA, coll);
+//		}
+//		else if (coll->a->size > 0 && steps_to_max == 0)
+//			execute_and_print(PB, coll);
+//		else
+//		{
+//			if (makes_sense_to_swap(coll)) {
+//
+//			}
+//			else if (steps_to_max < 0)
+//				execute_and_print(RRA, coll);
+//			else
+//				execute_and_print(RA, coll);
+//		}
 //			execute_and_print(RA, coll);
 //		print_stacks(coll);
 //		sleep(1);
-	}
+//	}
 }

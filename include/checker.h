@@ -3,7 +3,7 @@
 //
 
 #ifndef CHECKER_H
-#define CHECKER_H
+# define CHECKER_H
 
 void	checker(t_collection *coll);
 

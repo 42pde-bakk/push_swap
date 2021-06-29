@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "libft.h"
 #include "limits.h"
+#include <stdio.h>
 
 void	fatal_error(const char *s)
 {
@@ -26,7 +27,7 @@ unsigned int	amount_digits(int n)
 	}
 	return (digits);
 }
-#include <stdio.h>
+
 int	atoi_exit_on_error(const char *str)
 {
 	int			sign;
@@ -48,7 +49,8 @@ int	atoi_exit_on_error(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = (10 * result) + (str[i] - '0');
-		if (result < INT_MIN || result > INT_MAX) {
+		if (result < INT_MIN || result > INT_MAX)
+		{
 			printf("result is too big, %ld\n", result);
 			fatal_error("Error");
 		}

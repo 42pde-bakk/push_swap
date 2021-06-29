@@ -7,3 +7,6 @@
 [submodule "getnextline"]
 	path = getnextline
 	url = https://github.com/pde-bakk/getnextline
+[submodule "libc_vector"]
+	path = libc_vector
+	url = https://github.com/pde-bakk/libc_vector.git

@@ -19,6 +19,7 @@ add_executable(push_swap
 )
 
 include_directories(libft/include)
+include_directories(libc_vector/include)
 include_directories(getnextline/include)
 include_directories(ft_printf/include)
 include_directories(include)
