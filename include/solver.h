@@ -8,7 +8,7 @@
 # include "vector.h"
 
 //void	indiansort(t_collection *collection);
-void	insertion_sort(t_collection* coll, t_vector* ops);
+void	insertion_sort(t_collection *coll, t_vector *ops);
 
 void	execute_and_print(t_opcode op, t_collection *coll);
 
