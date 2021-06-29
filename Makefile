@@ -11,7 +11,7 @@ UTILS = utils parsing
 STACK_FILES = stack print_stacks stack_checks stack_operations
 OP_FILES = operations push swap rotate reverse_rotate
 CHECKER_FILES = checker
-SOLVER_FILES = main bogosort
+SOLVER_FILES = main sort solving_utils
 
 SRCS = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS))) \
 		$(addprefix $(STACK_DIR)/, $(addsuffix .c, $(STACK_FILES))) \
@@ -44,29 +44,30 @@ export SHELL
 all: $(NAME)
 
 $(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a
-	$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(SOLVER_OBJS) libft.a getnextline.a ft_printf.a $(INCLUDE) -o $@
 	@printf "$(PINK)Done building push_swap $(RESET)\n"
 
 $(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
-	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft/libft.a getnextline/getnextline.a ft_printf/libftprintf.a $(INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a $(INCLUDE) -o $@
 	@printf "$(PINK)Done building checker $(RESET)\n"
 
 %.a: %
 #	@echo -e "$(GREEN)Compiling $@ in directory $< $(RESET)"
 	@make -sC $<
+	cp $</$@ .
 
 %.o: %.c
 #	@echo -e "$(BLUE) Compiling file $< to $@ $(RESET)"
 	$(CC) -c $(CFLAGS) $(INCLUDE) $^ -o $@
 
 clean:
+	/bin/rm -f $(OBJS) $(CHECKER_OBJS) $(SOLVER_OBJS)
 	@/bin/rm -f *.o *~ *.gch
-	@/bin/rm -f $(OBJS) $(CHECKER_OBJS) $(SOLVER_OBJS)
 
 fclean: clean
 	@make fclean -sC libft
 	@make fclean -sC getnextline
 	@make fclean -sC ft_printf
-	@/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME) libft.a getnextline.a libftprintf.a
 
 re: fclean all
