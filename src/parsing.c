@@ -42,7 +42,7 @@ void	parse_array(t_collection *coll, char **argv, int i)
 		}
 		if (digits_amount > coll->max_amount_digits)
 			coll->max_amount_digits = digits_amount;
-		stack_push(coll->a, ft_atoi(argv[i]));
+		stack_push_under(coll->a, ft_atoi(argv[i]));
 		++i;
 	}
 }

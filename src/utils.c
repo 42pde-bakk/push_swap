@@ -59,6 +59,16 @@ int	atoi_exit_on_error(const char *str)
 	return (sign * (int)result);
 }
 
+unsigned int	get_max_bits(const unsigned int max_num)
+{
+	unsigned int max_bits;
+
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	return (max_bits);
+}
+
 void	clearscreen(void)
 {
 //	write(STDOUT_FILENO, "\e[1;1H\e[2J", 11);

@@ -10,6 +10,7 @@
 void			fatal_error(const char *s);
 unsigned int	amount_digits(int n);
 int				atoi_exit_on_error(const char *s);
+unsigned int	get_max_bits(unsigned int max_num);
 void			clearscreen(void);
 
 #endif //PUSH_SWAP_UTILS_H
