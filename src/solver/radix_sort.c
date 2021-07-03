@@ -15,8 +15,11 @@ void	radix_sort(t_collection* coll)
 	size_t i = 0, j;
 
 	set_sorted_pos(coll);
+	dprintf(2, "before while loop, max_bits is %u\n", max_bits);
 	while (i < max_bits)
 	{
+		dprintf(2, "%zu/%u\n", i, max_bits);
+		print_stacks(coll);
 		j = 0;
 		while (j < size)
 		{
@@ -33,5 +36,6 @@ void	radix_sort(t_collection* coll)
 			execute_and_print(PA, coll);
 		++i;
 	}
+	printf("donezo11\n");
 //	print_stacks(coll);
 }
