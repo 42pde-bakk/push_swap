@@ -11,7 +11,7 @@ static void	printf_wrapper(const int fd, const t_stacknode *node,
 							  int max_digits, const char *end)
 {
 	if (node)
-		ft_dprintf(fd, "%*d%s", max_digits, node->sorted_pos, end);
+		ft_dprintf(fd, "%*d%s", max_digits, node->data, end);
 	else
 		ft_dprintf(fd, "%*c%s", max_digits, ' ', end);
 }
@@ -34,14 +34,12 @@ static void	printf_wrapper_binary(const int fd, const t_stacknode *node,
 
 void	print_stacks(const t_collection *stacks)
 {
-	int			fd;
-	int			field_width;
+	const int	fd = STDERR_FILENO;
+	const int	field_width = (int)stacks->max_amount_digits + 2;
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 
 //	clearscreen();
-	fd = STDERR_FILENO;
-	field_width = (int)stacks->max_amount_digits + 2;
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
 	ft_dprintf(fd, "\n%*c|%*c\n\n", -field_width, 'A', field_width, 'B');
@@ -59,14 +57,13 @@ void	print_stacks(const t_collection *stacks)
 
 void	print_stacks_binary(const t_collection *stacks)
 {
-	int			fd;
-	const int	field_width = (int)get_max_bits(stacks->a->size + stacks->b->size - 1) - 1;
+	const int	fd = STDERR_FILENO;
+	const int	field_width = \
+	(int)get_max_bits(stacks->a->size + stacks->b->size - 1) - 1;
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 
 //	clearscreen();
-	printf("field_width is %d, max num is %d\n", field_width, stacks->a->size + stacks->b->size - 1);
-	fd = STDERR_FILENO;
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
 	ft_dprintf(fd, "\n%*c|%*c\n\n", -field_width, 'A', field_width, 'B');
