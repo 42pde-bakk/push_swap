@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import sys
-import os
 import subprocess
 import random
-import sh
 
 DEFAULT_AMOUNT = 4
 
@@ -47,15 +45,14 @@ def assert_checker_outcome(test_output, desired_outcome):
 
 def tester(*args) -> tuple:
 	arg = create_array(args)
-	print(arg)
-	p1 = subprocess.Popen(['./push_swap'] + arg, stdout=subprocess.PIPE)
-	p2 = subprocess.Popen(['./checker'] + arg, stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	output = p2.stdout.read().decode('ascii')
-	errput = p2.stderr.read().decode('ascii')
-	split_output = output.split()
-
-	# print(f'errput is {errput}')
-	print(f'output is "{output}"')
+	p = subprocess.Popen(f'ARG="{" ".join(arg)}"; ./push_swap $ARG | ./checker $ARG', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	stdout = p.stdout.read().decode('ascii')
+	stderr = p.stderr.read().decode('ascii')
+	print(f'stdout is {stdout}')
+	print(f'stderr is {stderr}')
+	result, amount_ops = stdout[1:3], int(''.join(c for c in stdout if c.isdigit()))
+	print(f'{result} in {amount_ops}')
+	return result, amount_ops
 
 
 def assert_outcome(test_input, desired_outcome):

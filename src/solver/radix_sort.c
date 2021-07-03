@@ -15,16 +15,15 @@ void	radix_sort(t_collection* coll)
 	size_t i = 0, j;
 
 	set_sorted_pos(coll);
-	dprintf(2, "before while loop, max_bits is %u\n", max_bits);
 	while (i < max_bits)
 	{
-		dprintf(2, "%zu/%u\n", i, max_bits);
-		print_stacks(coll);
 		j = 0;
+//		dprintf(2, "new loop, i is %ld\n", i);
+//		print_stacks(coll);
+//		print_stacks_binary(coll);
 		while (j < size)
 		{
 			unsigned int num = coll->a->top->sorted_pos;
-//			dprintf(2, "num is %d, check is %d\n", num, (num >> i) & 1);
 			// if (i + 1)-th bit is 1, leave it in stack A
 			if (((num >> i)&1) == 1)
 				execute_and_print(RA, coll);
@@ -32,10 +31,17 @@ void	radix_sort(t_collection* coll)
 				execute_and_print(PB, coll);
 			++j;
 		}
+//		dprintf(2, "before pushing everything back to A\n");
+//		print_stacks(coll);
+//		print_stacks_binary(coll);
 		while (!stack_is_empty(coll->b))
 			execute_and_print(PA, coll);
+//		dprintf(2, "after paaaaa\n");
+		if (sort_is_done(coll))
+			break;
 		++i;
 	}
-	printf("donezo11\n");
+//	dprintf(2, "Final ranking!\n");
 //	print_stacks(coll);
+//	print_stacks_binary(coll);
 }
