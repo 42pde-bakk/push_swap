@@ -36,12 +36,12 @@ bool	sort_is_done(const t_collection* coll)
 
 	if (!stack_is_empty(coll->b))
 		return (false);
-	tmp = coll->a->bottom;
-	while (tmp->next)
+	tmp = coll->a->top;
+	while (tmp->prev)
 	{
-		if (tmp->next->data < tmp->data)
+		if (tmp->prev->data < tmp->data)
 			return (false);
-		tmp = tmp->next;
+		tmp = tmp->prev;
 	}
 	return (true);
 }
