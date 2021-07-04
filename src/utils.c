@@ -50,10 +50,7 @@ int	atoi_exit_on_error(const char *str)
 	{
 		result = (10 * result) + (str[i] - '0');
 		if (result < INT_MIN || result > INT_MAX)
-		{
-			printf("result is too big, %ld\n", result);
 			fatal_error("Error");
-		}
 		++i;
 	}
 	return (sign * (int)result);
