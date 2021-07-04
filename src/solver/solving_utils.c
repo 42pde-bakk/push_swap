@@ -17,7 +17,7 @@ static void	print_operation(const t_opcode opcode)
 	if (opcode != ERROR)
 	{
 		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
-		ft_putendl_fd(op_stringcodes[opcode], STDERR_FILENO);
+//		ft_putendl_fd(op_stringcodes[opcode], STDERR_FILENO);
 	}
 }
 

@@ -45,11 +45,12 @@ def assert_checker_outcome(test_output, desired_outcome):
 
 def tester(*args) -> tuple:
 	arg = create_array(args)
+	# print(" ".join(arg))
 	p = subprocess.Popen(f'ARG="{" ".join(arg)}"; ./push_swap $ARG | ./checker $ARG', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout = p.stdout.read().decode('ascii')
 	stderr = p.stderr.read().decode('ascii')
-	print(f'stdout is {stdout}')
-	print(f'stderr is {stderr}')
+	print(f'stdout:\n    {stdout}')
+	print(f'stderr:\n    {stderr}')
 	result, amount_ops = stdout[1:3], int(''.join(c for c in stdout if c.isdigit()))
 	print(f'{result} in {amount_ops}')
 	return result, amount_ops
@@ -60,6 +61,7 @@ def assert_outcome(test_input, desired_outcome):
 	return 5
 
 
+# noinspection PyTypeChecker
 def moulinette(argv):
 	# score = 0
 	# try:
