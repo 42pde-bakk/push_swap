@@ -30,7 +30,6 @@ void	checker(t_collection *coll)
 		if (opcode != ERROR)
 		{
 			++op_count;
-			print_stacks(coll);
 		}
 		clearline(&line);
 		if (sort_is_done(coll))
@@ -52,7 +51,6 @@ int	main(int argc, char **argv)
 		parse_split_array(coll, argv[1]);
 	else
 		parse_array(coll, argv, 1);
-//	print_stacks(coll);
 	checker(coll);
 	return (cleanup(coll));
 }

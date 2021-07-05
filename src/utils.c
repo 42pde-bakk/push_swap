@@ -50,16 +50,25 @@ int	atoi_exit_on_error(const char *str)
 	{
 		result = (10 * result) + (str[i] - '0');
 		if (result < INT_MIN || result > INT_MAX)
-		{
-			printf("result is too big, %ld\n", result);
 			fatal_error("Error");
-		}
 		++i;
 	}
 	return (sign * (int)result);
 }
 
+unsigned int	get_max_bits(const unsigned int max_num)
+{
+	unsigned int	max_bits;
+
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	return (max_bits);
+}
+
 void	clearscreen(void)
 {
-//	write(STDOUT_FILENO, "\e[1;1H\e[2J", 11);
+	const ssize_t	dummy = write(STDOUT_FILENO, "\x1B[1;1H\x1B[2J", 11);
+
+	(void)dummy;
 }

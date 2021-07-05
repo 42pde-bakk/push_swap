@@ -15,7 +15,9 @@ static void	print_operation(const t_opcode opcode)
 	};
 
 	if (opcode != ERROR)
+	{
 		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
+	}
 }
 
 void	execute_and_print(const t_opcode op, t_collection *coll)

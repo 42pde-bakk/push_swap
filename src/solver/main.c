@@ -8,7 +8,7 @@
 #include "vector.h"
 #include "libft.h"
 
-static void	print_operation(const t_opcode opcode)
+void	print_operation(const t_opcode opcode)
 {
 	static const char			*op_stringcodes[] = {
 			[SA] = "sa", [SB] = "sb", [SS] = "ss",
@@ -21,7 +21,7 @@ static void	print_operation(const t_opcode opcode)
 		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
 }
 
-static void	print_operations(const t_vector* operations)
+void	print_operations(const t_vector *operations)
 {
 	size_t	i;
 
@@ -46,10 +46,7 @@ int	main(int argc, char **argv)
 	else
 		parse_array(coll, argv, 1);
 	operations = vector_init(coll->a->size);
-	insertion_sort(coll, operations);
-//	optimize(coll);
-	print_operations(operations);
-//	vector_destroy(operations);
+	radix_sort(coll);
 	vector_destroy(operations);
 	return (cleanup(coll));
 }

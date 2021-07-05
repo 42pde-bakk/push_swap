@@ -9,6 +9,8 @@
 
 //void	indiansort(t_collection *collection);
 void	insertion_sort(t_collection *coll, t_vector *ops);
+void	radix_sort(t_collection *coll);
+void	set_sorted_pos(t_collection *coll);
 
 void	execute_and_print(t_opcode op, t_collection *coll);
 
