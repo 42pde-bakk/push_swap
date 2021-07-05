@@ -11,7 +11,7 @@ UTILS = utils parsing
 STACK_FILES = stack print_stacks stack_checks stack_operations
 OP_FILES = operations push swap rotate reverse_rotate
 CHECKER_FILES = checker
-SOLVER_FILES = main insertion_sort solving_utils set_sorted_pos radix_sort
+SOLVER_FILES = main solving_utils set_sorted_pos radix_sort
 
 SRCS = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(UTILS))) \
 		$(addprefix $(STACK_DIR)/, $(addsuffix .c, $(STACK_FILES))) \

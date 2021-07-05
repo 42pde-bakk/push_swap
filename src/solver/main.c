@@ -21,7 +21,7 @@ void	print_operation(const t_opcode opcode)
 		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
 }
 
-void	print_operations(const t_vector* operations)
+void	print_operations(const t_vector *operations)
 {
 	size_t	i;
 
@@ -46,9 +46,7 @@ int	main(int argc, char **argv)
 	else
 		parse_array(coll, argv, 1);
 	operations = vector_init(coll->a->size);
-
 	radix_sort(coll);
-
 	vector_destroy(operations);
 	return (cleanup(coll));
 }

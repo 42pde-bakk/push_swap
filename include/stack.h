@@ -42,9 +42,9 @@ bool			sort_is_done(const t_collection *coll);
 
 bool			stack_duplicate_check(const t_stack *stack, int item);
 bool			stack_is_empty(const t_stack *stack);
-void			stack_push(t_stack *stack, t_stacknode* item);
+void			stack_push(t_stack *stack, t_stacknode *item);
 void			stack_push_under(t_stack *stack, int item);
-t_stacknode*	stack_pop(t_stack *stack);
+t_stacknode		*stack_pop(t_stack *stack);
 int				stack_peek(const t_stack *stack);
 void			print_stacks(const t_collection *stacks);
 void			print_stacks_binary(const t_collection *stacks);

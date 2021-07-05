@@ -7,7 +7,8 @@
 #include "ft_printf.h"
 #include "utils.h"
 
-static void printf_wrapper(const t_stacknode *node, int max_digits, const char *end)
+static void	printf_wrapper(const t_stacknode *node,
+							  int max_digits, const char *end)
 {
 	if (node)
 		ft_dprintf(STDERR_FILENO, "%*d%s", max_digits, node->sorted_pos, end);
@@ -15,13 +16,15 @@ static void printf_wrapper(const t_stacknode *node, int max_digits, const char *
 		ft_dprintf(STDERR_FILENO, "%*c%s", max_digits, ' ', end);
 }
 
-static void printf_wrapper_binary(const t_stacknode *node, int max_digits, const char *end)
+static void	printf_wrapper_binary(const t_stacknode *node,
+									 int max_digits, const char *end)
 {
 	if (node)
 	{
 		while (max_digits >= 0)
 		{
-			ft_dprintf(STDERR_FILENO, "%d", (((int)node->sorted_pos >> max_digits) & 1));
+			ft_dprintf(STDERR_FILENO, "%d",
+				(((int)node->sorted_pos >> max_digits) & 1));
 			--max_digits;
 		}
 		ft_dprintf(STDERR_FILENO, "%s", end);
@@ -36,10 +39,10 @@ void	print_stacks(const t_collection *stacks)
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 
-//	clearscreen();
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
-	ft_dprintf(STDERR_FILENO, "\n%*c|%*c\n\n", -field_width, 'A', field_width, 'B');
+	ft_dprintf(STDERR_FILENO, "\n%*c|%*c\n\n", -field_width, 'A',
+		   field_width, 'B');
 	while (tmp_a || tmp_b)
 	{
 		printf_wrapper(tmp_a, -field_width, "|");
@@ -59,10 +62,10 @@ void	print_stacks_binary(const t_collection *stacks)
 	t_stacknode	*tmp_a;
 	t_stacknode	*tmp_b;
 
-//	clearscreen();
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
-	ft_dprintf(STDERR_FILENO, "\n%*c|%*c\n\n", -field_width, 'A', field_width, 'B');
+	ft_dprintf(STDERR_FILENO, "\n%*c|%*c\n\n", -field_width, 'A',
+		   field_width, 'B');
 	while (tmp_a || tmp_b)
 	{
 		printf_wrapper_binary(tmp_a, field_width, "|");

@@ -5,10 +5,10 @@
 #include "vector.h"
 #include "stack.h"
 
-t_vector*	dump_items(const t_collection* coll)
+t_vector	*dump_items(const t_collection *coll)
 {
-	t_vector*		vec;
-	t_stacknode*	tmp;
+	t_vector	*vec;
+	t_stacknode	*tmp;
 
 	vec = vector_init(coll->a->size);
 	tmp = coll->a->bottom;
@@ -20,10 +20,10 @@ t_vector*	dump_items(const t_collection* coll)
 	return (vec);
 }
 
-size_t	get_largest_positive_value(const t_collection* coll)
+size_t	get_largest_positive_value(const t_collection *coll)
 {
-	t_stacknode* tmp;
-	int max;
+	t_stacknode	*tmp;
+	int			max;
 
 	max = 0;
 	tmp = coll->a->bottom;
@@ -36,10 +36,10 @@ size_t	get_largest_positive_value(const t_collection* coll)
 	return (max);
 }
 
-size_t	get_smallest_negative_value(const t_collection* coll)
+size_t	get_smallest_negative_value(const t_collection *coll)
 {
-	t_stacknode* tmp;
-	int min;
+	t_stacknode	*tmp;
+	int			min;
 
 	min = 0;
 	tmp = coll->a->bottom;
@@ -52,17 +52,17 @@ size_t	get_smallest_negative_value(const t_collection* coll)
 	return (min * -1);
 }
 
-void	build_arrays_of_indices(t_vector* all_items, t_vector* neg_idxs, t_vector* pos_idxs, t_collection* coll)
+void	build_arrays_of_indices(t_vector *all_items, t_vector *neg_idxs,
+								t_vector *pos_idxs, t_collection *coll)
 {
-	size_t	i;
-	int		value;
-	t_stacknode* tmp;
+	size_t		i;
+	int			value;
+	t_stacknode	*tmp;
 
 	i = 0;
 	while (i < all_items->size)
 	{
 		value = all_items->arr[i];
-//		dprintf(2, "i=%ld, value=%d, value * -1 = %d\n", i, value, value * -1);
 		if (value < 0)
 			neg_idxs->arr[value * -1] = i;
 		else
@@ -80,19 +80,18 @@ void	build_arrays_of_indices(t_vector* all_items, t_vector* neg_idxs, t_vector* 
 	}
 }
 
-void	set_sorted_pos(t_collection* coll)
+void	set_sorted_pos(t_collection *coll)
 {
 	t_vector	*all_items;
-	t_vector	*negative_indexes;
-	t_vector	*positive_indexes;
+	t_vector	*neg_indexes;
+	t_vector	*pos_indexes;
 
 	all_items = dump_items(coll);
-	negative_indexes = vector_init(get_smallest_negative_value(coll));
-	positive_indexes = vector_init(get_largest_positive_value(coll));
+	neg_indexes = vector_init(get_smallest_negative_value(coll));
+	pos_indexes = vector_init(get_largest_positive_value(coll));
 	vector_sort(all_items);
-	build_arrays_of_indices(all_items, negative_indexes, positive_indexes, coll);
-
+	build_arrays_of_indices(all_items, neg_indexes, pos_indexes, coll);
 	vector_destroy(all_items);
-	vector_destroy(negative_indexes);
-	vector_destroy(positive_indexes);
+	vector_destroy(neg_indexes);
+	vector_destroy(pos_indexes);
 }

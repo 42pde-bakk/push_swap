@@ -39,7 +39,6 @@ void	radix_sort(t_collection *coll)
 		j = 0;
 		while (j < size)
 		{
-			// if (i + 1)-th bit is 1, leave it in stack A
 			if (((coll->a->top->sorted_pos >> i) & 1) == 1)
 				execute_and_print(RA, coll);
 			else

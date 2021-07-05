@@ -30,7 +30,6 @@ void	checker(t_collection *coll)
 		if (opcode != ERROR)
 		{
 			++op_count;
-//			print_stacks(coll);
 		}
 		clearline(&line);
 		if (sort_is_done(coll))

@@ -16,7 +16,6 @@ add_executable(push_swap
 		${solver_files}
 		${stack_files}
 		${header_files}
-
 )
 
 include_directories(include)
