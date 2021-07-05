@@ -68,5 +68,5 @@ unsigned int	get_max_bits(const unsigned int max_num)
 
 void	clearscreen(void)
 {
-	write(STDOUT_FILENO, "\x1B[1;1H\x1B[2J", 11);
+	(void)write(STDOUT_FILENO, "\x1B[1;1H\x1B[2J", 11);
 }
