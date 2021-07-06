@@ -32,7 +32,6 @@ void	radix_sort(t_collection *coll)
 	size_t			i;
 	size_t			j;
 
-	set_sorted_pos(coll);
 	i = 0;
 	while (i < max_bits)
 	{

@@ -36,7 +36,6 @@ void	print_operations(const t_vector *operations)
 int	main(int argc, char **argv)
 {
 	t_collection	*coll;
-	t_vector		*operations;
 
 	coll = create_stacks();
 	if (argc == 1)
@@ -45,8 +44,7 @@ int	main(int argc, char **argv)
 		parse_split_array(coll, argv[1]);
 	else
 		parse_array(coll, argv, 1);
-	operations = vector_init(coll->a->size);
+	set_sorted_pos(coll);
 	radix_sort(coll);
-	vector_destroy(operations);
 	return (cleanup(coll));
 }
