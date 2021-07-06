@@ -33,7 +33,7 @@ void	radix_sort(t_collection *coll)
 	size_t			j;
 
 	i = 0;
-	while (i < max_bits)
+	while (i < max_bits && !sort_is_done(coll))
 	{
 		j = 0;
 		while (j < size)
@@ -46,8 +46,6 @@ void	radix_sort(t_collection *coll)
 		}
 		while (!stack_is_empty(coll->b))
 			execute_and_print(PA, coll);
-		if (sort_is_done(coll))
-			break ;
 		++i;
 	}
 }
