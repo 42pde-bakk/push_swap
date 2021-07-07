@@ -46,20 +46,18 @@ bool	sort_is_done(const t_collection *coll)
 	return (true);
 }
 
-/*
-static bool	stack_is_reverse_sorted(const t_stack *stack, const char id)
+static bool	stack_is_reverse_sorted(const t_stack *stack)
 {
 	t_stacknode	*tmp;
 
-	(void)id;
 	if (stack_is_empty(stack))
 		return (true);
-	tmp = stack->bottom;
-	while (tmp->next)
+	tmp = stack->top;
+	while (tmp->prev)
 	{
-		if (tmp->next->data > tmp->data)
+		if (tmp->data < tmp->prev->data)
 			return (false);
-		tmp = tmp->next;
+		tmp = tmp->prev;
 	}
 	return (true);
 }
@@ -69,16 +67,15 @@ bool	stack_is_sorted(const t_stack *stack, const char id)
 	t_stacknode	*tmp;
 
 	if (id == 'b')
-		return (stack_is_reverse_sorted(stack, id));
+		return (stack_is_reverse_sorted(stack));
 	if (stack_is_empty(stack))
 		return (true);
-	tmp = stack->bottom;
-	while (tmp->next)
+	tmp = stack->top;
+	while (tmp->prev)
 	{
-		if (tmp->next->data < tmp->data)
+		if (tmp->prev->data < tmp->data)
 			return (false);
-		tmp = tmp->next;
+		tmp = tmp->prev;
 	}
 	return (true);
 }
-*/
