@@ -15,6 +15,8 @@ static void	swap(t_stack *stack)
 	oldsecond = stack->top->prev;
 	oldtop->next = oldsecond;
 	oldtop->prev = oldsecond->prev;
+	if (oldtop->prev)
+		oldtop->prev->next = oldtop;
 	oldsecond->prev = oldtop;
 	oldsecond->next = NULL;
 	stack->top = oldsecond;
