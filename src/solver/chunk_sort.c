@@ -41,8 +41,8 @@ static void	push_chunks_to_b(t_collection *stacks, t_vector *operations, const s
 		else if (is_within_chunk(stacks->a->top->sorted_pos, lower_chunk, CHUNK_SIZE))
 		{
 			add_operation(PB, stacks, operations);
-//			if (upper_fill > 0)
-//				add_operation(RB, stacks, operations);
+			if (upper_fill > 0)
+				add_operation(RB, stacks, operations);
 			++lower_fill;
 			if (lower_fill % CHUNK_SIZE == 0)
 				--lower_chunk;
