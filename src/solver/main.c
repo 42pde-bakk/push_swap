@@ -8,34 +8,10 @@
 #include "vector.h"
 #include "libft.h"
 
-void	print_operation(const t_opcode opcode)
-{
-	static const char			*op_stringcodes[] = {
-			[SA] = "sa", [SB] = "sb", [SS] = "ss",
-			[PA] = "pa", [PB] = "pb",
-			[RA] = "ra", [RB] = "rb", [RR] = "rr",
-			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
-	};
-
-	if (opcode != ERROR)
-		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
-}
-
-void	print_operations(const t_vector *operations)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < operations->size)
-	{
-		print_operation(operations->arr[i]);
-		++i;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_collection	*coll;
+	t_vector		*operations;
 
 	coll = create_stacks();
 	if (argc == 1)
@@ -45,8 +21,19 @@ int	main(int argc, char **argv)
 	else
 		parse_array(coll, argv, 1);
 	set_sorted_pos(coll);
-//	radix_sort(coll);
-//	triple_sort(coll);
-	chunk_sort(coll);
+	if (coll->a->size <= 5)
+	{
+		dprintf(2, "gonna run smol_sort\n");
+		operations = smol_sort(coll);
+	}
+	else
+	{
+		dprintf(2, "gonna run chunk_sort!\n");
+	//	operations = radix_sort(coll);
+		operations = chunk_sort(coll);
+	}
+	optimize_instructions(operations);
+	print_all_operations(operations);
+	vector_destroy(operations);
 	return (cleanup(coll));
 }

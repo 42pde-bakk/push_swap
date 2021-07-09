@@ -5,7 +5,6 @@
 #include "stack.h"
 #include "solver.h"
 #include "vector.h"
-#include "operations.h"
 #include "utils.h"
 
 size_t	get_max_rotations(const t_stack *stack, const size_t shift_bits_amount)
@@ -25,27 +24,30 @@ size_t	get_max_rotations(const t_stack *stack, const size_t shift_bits_amount)
 	return (stack->size);
 }
 
-void	radix_sort(t_collection *coll)
+t_vector	*radix_sort(t_collection *coll)
 {
 	const size_t	size = coll->a->size;
 	const size_t	max_bits = get_max_bits(size - 1);
+	t_vector		*ops;
 	size_t			i;
 	size_t			j;
 
 	i = 0;
+	ops = vector_init(size);
 	while (i < max_bits && !sort_is_done(coll))
 	{
 		j = 0;
 		while (j < size)
 		{
 			if (((coll->a->top->sorted_pos >> i) & 1) == 1)
-				execute_and_print(RA, coll);
+				add_operation(RA, coll, ops);
 			else
-				execute_and_print(PB, coll);
+				add_operation(PB, coll, ops);
 			++j;
 		}
 		while (!stack_is_empty(coll->b))
-			execute_and_print(PA, coll);
+			add_operation(PA, coll, ops);
 		++i;
 	}
+	return (ops);
 }

@@ -30,6 +30,7 @@ void	checker(t_collection *coll)
 		if (opcode != ERROR)
 		{
 			++op_count;
+			ft_putendl_fd(line, 2);
 		}
 		clearline(&line);
 		if (sort_is_done(coll))

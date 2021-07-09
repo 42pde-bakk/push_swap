@@ -62,11 +62,11 @@ static bool	stack_is_reverse_sorted(const t_stack *stack)
 	return (true);
 }
 
-bool	stack_is_sorted(const t_stack *stack, const char id)
+bool	stack_is_sorted(const t_stack *stack)
 {
 	t_stacknode	*tmp;
 
-	if (id == 'b')
+	if (stack->id == 'b')
 		return (stack_is_reverse_sorted(stack));
 	if (stack_is_empty(stack))
 		return (true);
