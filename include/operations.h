@@ -11,7 +11,7 @@ typedef void	(*t_operation)();
 
 t_opcode	string2opcode(const char *str);
 void		execute_operation(t_opcode opcode, t_collection *collection);
-void		print_operation(t_opcode opcode);
+void		print_operation(t_opcode opcode, int fd);
 
 void		sa(t_collection *collection);
 void		sb(t_collection *collection);

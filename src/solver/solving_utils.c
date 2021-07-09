@@ -4,10 +4,12 @@
 
 #include "operations.h"
 #include "vector.h"
+#include <unistd.h>
 
 void	add_operation(const t_opcode op, t_collection *stacks, t_vector *operations)
 {
 	vector_pushback(operations, op);
+	print_operation(op, STDERR_FILENO);
 	execute_operation(op, stacks);
 }
 
@@ -49,7 +51,7 @@ void	print_all_operations(const t_vector *operations)
 	i = 0;
 	while (i < operations->size)
 	{
-		print_operation(operations->arr[i]);
+		print_operation(operations->arr[i], STDOUT_FILENO);
 		++i;
 	}
 }

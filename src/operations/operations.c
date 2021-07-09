@@ -35,7 +35,7 @@ t_opcode	string2opcode(const char *str)
 	return (ERROR);
 }
 
-void	print_operation(const t_opcode opcode)
+void	print_operation(const t_opcode opcode, const int fd)
 {
 	static const char			*op_stringcodes[] = {
 			[SA] = "sa", [SB] = "sb", [SS] = "ss",
@@ -46,7 +46,7 @@ void	print_operation(const t_opcode opcode)
 
 	if (opcode != ERROR)
 	{
-		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
+		ft_putendl_fd(op_stringcodes[opcode], fd);
 	}
 }
 
