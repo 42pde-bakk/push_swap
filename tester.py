@@ -79,7 +79,7 @@ def get_average(test_input, amount_tests=10) -> int:
 		try:
 			assert_amount_ops(test_input, amount_ops)
 		except AssertionError as e:
-			quit(print(f'{amount_ops} instructions is too many!!!!'))
+			print(f'{amount_ops} instructions is too many!!!!')
 		total_ops += amount_ops
 	return int(total_ops / amount_tests)
 
