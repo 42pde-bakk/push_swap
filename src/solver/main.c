@@ -45,6 +45,8 @@ int	main(int argc, char **argv)
 	else
 		parse_array(coll, argv, 1);
 	set_sorted_pos(coll);
-	radix_sort(coll);
+//	radix_sort(coll);
+//	triple_sort(coll);
+	chunk_sort(coll);
 	return (cleanup(coll));
 }

@@ -6,14 +6,18 @@
 
 static void	swap(t_stack *stack)
 {
-	int	tmp;
+	t_stacknode	*oldtop;
+	t_stacknode	*oldsecond;
 
-	if (stack->size > 1)
-	{
-		tmp = stack->top->data;
-		stack->top->data = stack->top->prev->data;
-		stack->top->prev->data = tmp;
-	}
+	if (stack->size <= 1)
+		return ;
+	oldtop = stack->top;
+	oldsecond = stack->top->prev;
+	oldtop->next = oldsecond;
+	oldtop->prev = oldsecond->prev;
+	oldsecond->prev = oldtop;
+	oldsecond->next = NULL;
+	stack->top = oldsecond;
 }
 
 void	sa(t_collection *collection)
