@@ -6,9 +6,9 @@
 #include "vector.h"
 #include <unistd.h>
 
-void	add_operation(const t_opcode op, t_collection *stacks, t_vector *operations)
+void	add_operation(const t_opcode op, t_collection *stacks, t_vector *ops)
 {
-	vector_pushback(operations, op);
+	vector_pushback(ops, op);
 	print_operation(op, STDERR_FILENO);
 	execute_operation(op, stacks);
 }
@@ -28,7 +28,8 @@ size_t	get_chunk_size(t_stack *stack)
 	return (25);
 }
 
-bool	is_within_chunk(const size_t item, const size_t chunk_nb, const size_t chunk_size)
+bool	is_within_chunk(const size_t item, const size_t chunk_nb, \
+const size_t chunk_size)
 {
 	return (item / chunk_size == chunk_nb);
 }

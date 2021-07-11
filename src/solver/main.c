@@ -23,13 +23,10 @@ int	main(int argc, char **argv)
 	set_sorted_pos(coll);
 	if (coll->a->size <= 5)
 	{
-		dprintf(2, "gonna run smol_sort\n");
 		operations = smol_sort(coll);
 	}
 	else
 	{
-		dprintf(2, "gonna run chunk_sort!\n");
-	//	operations = radix_sort(coll);
 		operations = chunk_sort(coll);
 	}
 	optimize_instructions(operations);

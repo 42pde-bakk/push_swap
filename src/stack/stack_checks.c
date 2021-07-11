@@ -18,13 +18,6 @@ bool	stack_duplicate_check(const t_stack *stack, int item)
 	return (false);
 }
 
-int	get_node_value(const t_stacknode *node)
-{
-	if (!node)
-		return (INT_MIN);
-	return (node->data);
-}
-
 bool	stack_is_empty(const t_stack *stack)
 {
 	return (stack->top == NULL);

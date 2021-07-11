@@ -9,6 +9,7 @@
 static void	push_smallest_to_b(t_collection *stacks, t_vector *ops)
 {
 	const unsigned int	max = stacks->a->size;
+
 	while (stacks->a->size > 3)
 	{
 		if (stacks->a->top->sorted_pos < max - 3)
@@ -20,7 +21,7 @@ static void	push_smallest_to_b(t_collection *stacks, t_vector *ops)
 
 static void	sort_three(t_collection *stacks, t_vector *ops)
 {
-	const unsigned int max = stacks->a->size + stacks->b->size - 1;
+	const unsigned int	max = stacks->a->size + stacks->b->size - 1;
 
 	if (stacks->a->top->sorted_pos == max)
 		add_operation(RA, stacks, ops);
@@ -34,7 +35,8 @@ static void	push_b_to_a(t_collection *stacks, t_vector *ops)
 {
 	while (!stack_is_empty(stacks->b))
 	{
-		if (stacks->b->size > 1 && stacks->b->top->sorted_pos < stacks->b->top->prev->sorted_pos)
+		if (stacks->b->size > 1 && \
+		stacks->b->top->sorted_pos < stacks->b->top->prev->sorted_pos)
 			add_operation(SB, stacks, ops);
 		add_operation(PA, stacks, ops);
 	}
@@ -46,7 +48,6 @@ t_vector	*smol_sort(t_collection *stacks)
 
 	operations = vector_init(stacks->a->size);
 	push_smallest_to_b(stacks, operations);
-	dprintf(2, "vector size after pushing smallest to b is %lu\n", operations->size);
 	sort_three(stacks, operations);
 	push_b_to_a(stacks, operations);
 	return (operations);

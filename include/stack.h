@@ -36,7 +36,6 @@ typedef struct s_collection
 t_collection	*create_stacks(void);
 t_collection	*copy_stacks(const t_collection *stack);
 void			delete_stack(t_stack *stack);
-int				get_node_value(const t_stacknode *node);
 
 bool			stack_is_sorted(const t_stack *stack);
 bool			sort_is_done(const t_collection *coll);
