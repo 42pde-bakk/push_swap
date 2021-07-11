@@ -3,25 +3,58 @@
 //
 
 #include "operations.h"
-#include "libft.h"
+#include "vector.h"
+#include <unistd.h>
 
-static void	print_operation(const t_opcode opcode)
+void	add_operation(const t_opcode op, t_collection *stacks, t_vector *ops)
 {
-	static const char			*op_stringcodes[] = {
-			[SA] = "sa", [SB] = "sb", [SS] = "ss",
-			[PA] = "pa", [PB] = "pb",
-			[RA] = "ra", [RB] = "rb", [RR] = "rr",
-			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
-	};
-
-	if (opcode != ERROR)
-	{
-		ft_putendl_fd(op_stringcodes[opcode], STDOUT_FILENO);
-	}
+	vector_pushback(ops, op);
+	print_operation(op, STDERR_FILENO);
+	execute_operation(op, stacks);
 }
 
-void	execute_and_print(const t_opcode op, t_collection *coll)
+size_t	get_chunk_size(t_stack *stack)
 {
-	execute_operation(op, coll);
-	print_operation(op);
+	if (stack->size <= 5)
+		return (2);
+	if (stack->size <= 10)
+		return (stack->size / 3);
+	if (stack->size <= 50)
+		return (stack->size / 10);
+	if (stack->size < 100)
+		return (8);
+	if (stack->size < 150)
+		return (8);
+	return (25);
+}
+
+bool	is_within_chunk(const size_t item, const size_t chunk_nb, \
+const size_t chunk_size)
+{
+	return (item / chunk_size == chunk_nb);
+}
+
+size_t	find_steps(const size_t to_find, t_stacknode *startnode)
+{
+	size_t	steps;
+
+	steps = 0;
+	while (startnode && startnode->sorted_pos != to_find)
+	{
+		++steps;
+		startnode = startnode->prev;
+	}
+	return (steps);
+}
+
+void	print_all_operations(const t_vector *operations)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < operations->size)
+	{
+		print_operation(operations->arr[i], STDOUT_FILENO);
+		++i;
+	}
 }

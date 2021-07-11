@@ -35,6 +35,21 @@ t_opcode	string2opcode(const char *str)
 	return (ERROR);
 }
 
+void	print_operation(const t_opcode opcode, const int fd)
+{
+	static const char			*op_stringcodes[] = {
+			[SA] = "sa", [SB] = "sb", [SS] = "ss",
+			[PA] = "pa", [PB] = "pb",
+			[RA] = "ra", [RB] = "rb", [RR] = "rr",
+			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
+	};
+
+	if (opcode != ERROR)
+	{
+		ft_putendl_fd(op_stringcodes[opcode], fd);
+	}
+}
+
 void	execute_operation(t_opcode opcode, t_collection *collection)
 {
 	static const t_operation	operations[] = {

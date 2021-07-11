@@ -23,6 +23,7 @@ typedef struct s_stack
 	unsigned int	size;
 	t_stacknode		*top;
 	t_stacknode		*bottom;
+	char			id;
 }t_stack;
 
 typedef struct s_collection
@@ -35,9 +36,8 @@ typedef struct s_collection
 t_collection	*create_stacks(void);
 t_collection	*copy_stacks(const t_collection *stack);
 void			delete_stack(t_stack *stack);
-int				get_node_value(const t_stacknode *node);
 
-bool			stack_is_sorted(const t_stack *stack, char id);
+bool			stack_is_sorted(const t_stack *stack);
 bool			sort_is_done(const t_collection *coll);
 
 bool			stack_duplicate_check(const t_stack *stack, int item);
