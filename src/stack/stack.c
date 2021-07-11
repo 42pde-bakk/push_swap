@@ -20,7 +20,7 @@ t_collection	*create_stacks(void)
 	out->b = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (out->b == NULL)
 		fatal_error("Error allocating memory for stack B");
-	out->a->id = 'b';
+	out->b->id = 'b';
 	return (out);
 }
 
