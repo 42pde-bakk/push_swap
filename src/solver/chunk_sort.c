@@ -8,7 +8,7 @@
 
 bool	should_swap(const t_stack *s)
 {
-	if (s->size <= 1)
+	if (s->size < 2)
 		return false;
 	if (s->id == 'a' && s->top->data > s->top->prev->data)
 		return true;
@@ -41,7 +41,7 @@ static void	push_chunks_to_b(t_collection *stacks, t_vector *operations, const s
 		else if (is_within_chunk(stacks->a->top->sorted_pos, lower_chunk, CHUNK_SIZE))
 		{
 			add_operation(PB, stacks, operations);
-			if (upper_fill > 0)
+			if (upper_fill > 0 || lower_chunk != CHUNK_AMOUNT / 2 - 1)
 				add_operation(RB, stacks, operations);
 			++lower_fill;
 			if (lower_fill % CHUNK_SIZE == 0)
@@ -50,8 +50,6 @@ static void	push_chunks_to_b(t_collection *stacks, t_vector *operations, const s
 		else
 		{
 			add_operation(RA, stacks, operations);
-//			if (should_swap(stacks->a) && should_swap(stacks->b))
-//				add_operation(SS, stacks, operations);
 		}
 	}
 }
@@ -71,7 +69,10 @@ void	navigate_to(const size_t to_find, t_collection *stacks, t_vector *operation
 	} else {
 		while (steps != 0)
 		{
-			add_operation(RB, stacks, operations);
+			if (steps == 1 && stacks->b->top->sorted_pos == to_find - 1)
+				add_operation(SB, stacks, operations);
+			else
+				add_operation(RB, stacks, operations);
 			--steps;
 		}
 	}
@@ -93,15 +94,17 @@ void	push_back_to_a(t_collection *stacks, t_vector *operations)
 t_vector	*chunk_sort(t_collection *stacks)
 {
 	const size_t	chunk_size = get_chunk_size(stacks->a);
-	const size_t	chunk_amounts = stacks->a->size / chunk_size;
-//	const size_t	chunk_amounts = (stacks->a->size + chunk_size - 1) / chunk_size;
+	const size_t	chunk_amounts = (stacks->a->size + chunk_size - 1) / chunk_size;
 	t_vector		*operations;
 
 	dprintf(2, "chunk-size is %lu, amounts is %lu\n", chunk_size, chunk_amounts);
 	operations = vector_init(chunk_size);
 	push_chunks_to_b(stacks, operations, chunk_size, chunk_amounts);
-//	print_stacks(stacks);
+
+	size_t	first_steps = operations->size;
+	print_stacks(stacks);
 	push_back_to_a(stacks, operations);
-//	print_stacks(stacks);
+	dprintf(2, "It took %lu operations to push everythin to b, and then another %lu to push everything back to a\n", first_steps, operations->size - first_steps);
+
 	return (operations);
 }
