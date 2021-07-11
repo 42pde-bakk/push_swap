@@ -75,7 +75,7 @@ def get_average(test_input, amount_tests=10) -> int:
 	for nb in range(amount_tests):
 		result, amount_ops = tester(test_input)
 		if result != 'OK':
-			quit(print(f'KO on input "{test_input}"'))
+			print(f'KO on input "{test_input}"') and quit()
 		try:
 			assert_amount_ops(test_input, amount_ops)
 		except AssertionError as e:
@@ -106,7 +106,7 @@ def moulinette(argv):
 	# print(tester(5))
 	# print(tester(27))
 	for i in range(1, len(argv)):
-		average_ops = get_average(int(argv[i]), 10)
+		average_ops = get_average(int(argv[i]), 200)
 		print(f'Average amount of operations for test {argv[i]} is {average_ops}')
 
 
