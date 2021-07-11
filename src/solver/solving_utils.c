@@ -18,7 +18,9 @@ size_t	get_chunk_size(t_stack *stack)
 	if (stack->size <= 5)
 		return (2);
 	if (stack->size <= 10)
-		return (5);
+		return (stack->size / 3);
+	if (stack->size <= 50)
+		return (stack->size / 10);
 	if (stack->size < 100)
 		return (8);
 	if (stack->size < 150)
