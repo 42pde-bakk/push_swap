@@ -19,7 +19,7 @@ t_vector	*smol_sort(t_collection *stacks);
 
 void		set_sorted_pos(t_collection *coll);
 size_t		get_chunk_size(t_stack *stack);
-t_opcode	get_rotation_direction(const t_stack *stack, ssize_t *steps);
+t_opcode	get_rotation_direction(const t_stack *stack, ssize_t steps);
 
 bool		is_within_chunk(size_t item, size_t chunk_nb, size_t chunk_size);
 ssize_t		find_steps(size_t to_find, t_stacknode *startnode);

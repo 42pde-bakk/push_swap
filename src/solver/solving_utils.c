@@ -13,11 +13,10 @@ void	add_operation(const t_opcode op, t_collection *stacks, t_vector *ops)
 	execute_operation(op, stacks);
 }
 
-t_opcode	get_rotation_direction(const t_stack *stack, ssize_t *steps)
+t_opcode	get_rotation_direction(const t_stack *stack, const ssize_t steps)
 {
-	if (*steps > stack->size / 2)
+	if (steps > stack->size / 2)
 	{
-		*steps = stack->size - *steps;
 		if (stack->id == 'a')
 			return (RRA);
 		return (RRB);

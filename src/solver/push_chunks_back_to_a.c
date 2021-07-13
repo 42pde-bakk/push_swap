@@ -11,17 +11,22 @@ void	sync_up(t_collection *stacks, t_vector *ops)
 		add_operation(RRA, stacks, ops);
 }
 
-void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, const ssize_t *max_element)
+void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, ssize_t *min_element, const ssize_t max_element)
 {
-	const t_opcode ROT_DIR = get_rotation_direction(stacks->b, &steps);
+	const t_opcode ROT_DIR = get_rotation_direction(stacks->b, steps);
 
-	while (stacks->b->top->sorted_pos != *max_element)
+	while (stacks->b->top->sorted_pos != max_element)
 	{
-		if (stacks->b->top->sorted_pos == *max_element - 1) {
+		if (stacks->b->top->sorted_pos == max_element - 1) {
 			add_operation(PA, stacks, ops);
-			continue;
+		} else if (stacks->b->top->sorted_pos == *min_element) {
+			add_operation(PA, stacks, ops);
+			if (stacks->a->size > 1)
+				add_operation(RA, stacks, ops);
+			++(*min_element);
 		}
-		add_operation(ROT_DIR, stacks, ops);
+		else
+			add_operation(ROT_DIR, stacks, ops);
 	}
 	add_operation(PA, stacks, ops);
 	if (stacks->a->size > 1 && stacks->a->top->sorted_pos == stacks->a->top->prev->sorted_pos + 1)
@@ -30,7 +35,7 @@ void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, const ssize_
 	}
 }
 
-void	push_chunk_to_a(t_collection *stacks, t_vector *operations, const ssize_t min_element, ssize_t max_element)
+void	push_chunk_to_a(t_collection *stacks, t_vector *operations, ssize_t min_element, ssize_t max_element)
 {
 	ssize_t steps;
 
@@ -38,10 +43,10 @@ void	push_chunk_to_a(t_collection *stacks, t_vector *operations, const ssize_t m
 	{
 		steps = find_steps(max_element, stacks->b->top);
 		if (steps >= 0)
-			push_logic(stacks, operations, steps, &max_element);
+			push_logic(stacks, operations, steps, &min_element, max_element);
 		--max_element;
 	}
-//	sync_up(stacks, operations);
+	sync_up(stacks, operations);
 }
 
 void	push_back_to_a(t_collection *stacks, t_vector *operations, const size_t CHUNK_SIZE, const size_t CHUNK_AMOUNT)
