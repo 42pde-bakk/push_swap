@@ -32,8 +32,6 @@ void	checker(t_collection *coll)
 			++op_count;
 		}
 		clearline(&line);
-		if (sort_is_done(coll))
-			break ;
 	}
 	clearline(&line);
 	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", \
