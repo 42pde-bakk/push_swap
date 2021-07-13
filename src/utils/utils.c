@@ -5,7 +5,6 @@
 #include "utils.h"
 #include "libft.h"
 #include "limits.h"
-#include <stdio.h>
 
 void	fatal_error(const char *s)
 {
@@ -54,16 +53,6 @@ int	atoi_exit_on_error(const char *str)
 		++i;
 	}
 	return (sign * (int)result);
-}
-
-unsigned int	get_max_bits(const unsigned int max_num)
-{
-	unsigned int	max_bits;
-
-	max_bits = 0;
-	while ((max_num >> max_bits) != 0)
-		++max_bits;
-	return (max_bits);
 }
 
 void	clearscreen(void)

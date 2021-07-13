@@ -13,6 +13,20 @@ void	add_operation(const t_opcode op, t_collection *stacks, t_vector *ops)
 	execute_operation(op, stacks);
 }
 
+t_opcode	get_rotation_direction(const t_stack *stack, ssize_t *steps)
+{
+	if (*steps > stack->size / 2)
+	{
+		*steps = stack->size - *steps;
+		if (stack->id == 'a')
+			return (RRA);
+		return (RRB);
+	}
+	if (stack->id == 'a')
+		return (RA);
+	return (RB);
+}
+
 size_t	get_chunk_size(t_stack *stack)
 {
 	if (stack->size <= 5)
@@ -34,17 +48,19 @@ const size_t chunk_size)
 	return (item / chunk_size == chunk_nb);
 }
 
-size_t	find_steps(const size_t to_find, t_stacknode *startnode)
+ssize_t	find_steps(const size_t to_find, t_stacknode *startnode)
 {
-	size_t	steps;
+	ssize_t	steps;
 
 	steps = 0;
-	while (startnode && startnode->sorted_pos != to_find)
+	while (startnode)
 	{
+		if (startnode->sorted_pos == to_find)
+			return (steps);
 		++steps;
 		startnode = startnode->prev;
 	}
-	return (steps);
+	return (-1);
 }
 
 void	print_all_operations(const t_vector *operations)
