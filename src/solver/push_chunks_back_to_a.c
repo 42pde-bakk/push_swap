@@ -11,33 +11,37 @@ void	sync_up(t_collection *stacks, t_vector *ops)
 		add_operation(RRA, stacks, ops);
 }
 
-void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps)
+void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, const ssize_t *max_element)
 {
 	const t_opcode ROT_DIR = get_rotation_direction(stacks->b, &steps);
 
-	while (steps > 0)
+	while (stacks->b->top->sorted_pos != *max_element)
 	{
+		if (stacks->b->top->sorted_pos == *max_element - 1) {
+			add_operation(PA, stacks, ops);
+			continue;
+		}
 		add_operation(ROT_DIR, stacks, ops);
-		--steps;
 	}
 	add_operation(PA, stacks, ops);
+	if (stacks->a->size > 1 && stacks->a->top->sorted_pos == stacks->a->top->prev->sorted_pos + 1)
+	{
+		add_operation(SA, stacks, ops);
+	}
 }
 
-void	push_chunk_to_a(t_collection *stacks, t_vector *operations, const size_t min_element, size_t max_element)
+void	push_chunk_to_a(t_collection *stacks, t_vector *operations, const ssize_t min_element, ssize_t max_element)
 {
 	ssize_t steps;
 
-	steps = find_steps(max_element, stacks->b->top);
-	dprintf(2, "min is %lu, max is %lu, steps is %zd\n", min_element, max_element, steps);
-	while (steps >= 0 && max_element >= min_element)
+	while (max_element >= min_element)
 	{
-		dprintf(2, "max_elem is %lu, steps is %zd\n", max_element, steps);
-//		dprintf(2, "in chunk loop, steps is %zd\n", steps);
-		push_logic(stacks, operations, steps);
-		--max_element;
 		steps = find_steps(max_element, stacks->b->top);
+		if (steps >= 0)
+			push_logic(stacks, operations, steps, &max_element);
+		--max_element;
 	}
-	sync_up(stacks, operations);
+//	sync_up(stacks, operations);
 }
 
 void	push_back_to_a(t_collection *stacks, t_vector *operations, const size_t CHUNK_SIZE, const size_t CHUNK_AMOUNT)
@@ -47,8 +51,7 @@ void	push_back_to_a(t_collection *stacks, t_vector *operations, const size_t CHU
 	current_chunk = (int)CHUNK_AMOUNT - 1;
 	while (current_chunk >= 0)
 	{
-		dprintf(2, "in push_back_to_a loop\n");
-		push_chunk_to_a(stacks, operations, current_chunk * CHUNK_SIZE, get_max_element(stacks->b));
+		push_chunk_to_a(stacks, operations, (ssize_t)(current_chunk * CHUNK_SIZE), (ssize_t)get_max_element(stacks->b));
 		--current_chunk;
 	}
 }
