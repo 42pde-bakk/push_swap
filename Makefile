@@ -2,6 +2,7 @@ NAME = push_swap checker
 INCLUDE = -Iinclude -Ilibft/include -Igetnextline/include -Ift_printf/include -Ilibc_vector/include
 
 SRC_DIR = ./src
+CHUNK_DIR = $(SRC_DIR)/chunk
 UTILS_DIR = $(SRC_DIR)/utils
 STACK_DIR = $(SRC_DIR)/stack
 OPERATIONS_DIR = $(SRC_DIR)/operations
@@ -12,10 +13,12 @@ UTILS = utils parsing max_in_stack
 STACK_FILES = stack print_stacks stack_checks stack_operations
 OP_FILES = operations push swap rotate reverse_rotate
 CHECKER_FILES = checker
+CHUNK_FILES = chunk
 SOLVER_FILES = main solving_utils set_sorted_pos radix_sort chunk_sort optimization smol_sort \
 	push_chunks_to_b push_chunks_back_to_a
 
 SRCS = $(addprefix $(UTILS_DIR)/, $(addsuffix .c, $(UTILS))) \
+		$(addprefix $(CHUNK_DIR)/, $(addsuffix .c, $(CHUNK_FILES))) \
 		$(addprefix $(STACK_DIR)/, $(addsuffix .c, $(STACK_FILES))) \
 		$(addprefix $(OPERATIONS_DIR)/, $(addsuffix .c, $(OP_FILES)))
 CHECKER_SRCS = $(addprefix $(CHECKER_DIR)/, $(addsuffix .c, $(CHECKER_FILES)))

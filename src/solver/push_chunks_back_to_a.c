@@ -4,6 +4,7 @@
 
 #include "solver.h"
 #include "utils.h"
+#include "chunk.h"
 
 void	sync_up(t_collection *stacks, t_vector *ops)
 {
@@ -11,19 +12,19 @@ void	sync_up(t_collection *stacks, t_vector *ops)
 		add_operation(RRA, stacks, ops);
 }
 
-void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, ssize_t *min_element, const ssize_t max_element)
+void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, t_chunk *chunk)
 {
 	const t_opcode ROT_DIR = get_rotation_direction(stacks->b, steps);
 
-	while (stacks->b->top->sorted_pos != max_element)
+	while (stacks->b->top->sorted_pos != (unsigned int)chunk->max)
 	{
-		if (stacks->b->top->sorted_pos == max_element - 1) {
+		if (stacks->b->top->sorted_pos == (unsigned int)chunk->max - 1) {
 			add_operation(PA, stacks, ops);
-		} else if (stacks->b->top->sorted_pos == *min_element) {
+		} else if (stacks->b->top->sorted_pos == (unsigned int)chunk->min) {
 			add_operation(PA, stacks, ops);
 			if (stacks->a->size > 1)
 				add_operation(RA, stacks, ops);
-			++(*min_element);
+			++(chunk->min);
 		}
 		else
 			add_operation(ROT_DIR, stacks, ops);
@@ -35,28 +36,28 @@ void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, ssize_t *min
 	}
 }
 
-void	push_chunk_to_a(t_collection *stacks, t_vector *operations, ssize_t min_element, ssize_t max_element)
+void	push_chunk_to_a(t_collection *stacks, t_vector *operations, t_chunk current_chunk)
 {
 	ssize_t steps;
 
-	while (max_element >= min_element)
+	while (current_chunk.max >= current_chunk.min)
 	{
-		steps = find_steps(max_element, stacks->b->top);
+		steps = find_steps(current_chunk.max, stacks->b->top);
 		if (steps >= 0)
-			push_logic(stacks, operations, steps, &min_element, max_element);
-		--max_element;
+			push_logic(stacks, operations, steps, &current_chunk);
+		--current_chunk.max;
 	}
 	sync_up(stacks, operations);
 }
 
-void	push_back_to_a(t_collection *stacks, t_vector *operations, const size_t CHUNK_SIZE, const size_t CHUNK_AMOUNT)
+void	push_back_to_a(t_collection *stacks, t_vector *operations, const int CHUNK_SIZE, const int CHUNK_AMOUNT)
 {
-	int	current_chunk;
+	t_chunk	current_chunk;
 
-	current_chunk = (int)CHUNK_AMOUNT - 1;
-	while (current_chunk >= 0)
+	current_chunk = chunk_init((int)CHUNK_AMOUNT - 1, CHUNK_SIZE);
+	while (current_chunk.nb >= 0)
 	{
-		push_chunk_to_a(stacks, operations, (ssize_t)(current_chunk * CHUNK_SIZE), (ssize_t)get_max_element(stacks->b));
-		--current_chunk;
+		push_chunk_to_a(stacks, operations, current_chunk);
+		chunk_decrease(&current_chunk);
 	}
 }

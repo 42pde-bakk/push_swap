@@ -26,27 +26,6 @@ t_opcode	get_rotation_direction(const t_stack *stack, const ssize_t steps)
 	return (RB);
 }
 
-size_t	get_chunk_size(t_stack *stack)
-{
-	if (stack->size <= 5)
-		return (2);
-	if (stack->size <= 10)
-		return (stack->size / 3);
-	if (stack->size <= 50)
-		return (stack->size / 10);
-	if (stack->size < 100)
-		return (8);
-	if (stack->size < 150)
-		return (8);
-	return (25);
-}
-
-bool	is_within_chunk(const size_t item, const size_t chunk_nb, \
-const size_t chunk_size)
-{
-	return (item / chunk_size == chunk_nb);
-}
-
 ssize_t	find_steps(const size_t to_find, t_stacknode *startnode)
 {
 	ssize_t	steps;
