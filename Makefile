@@ -13,7 +13,7 @@ UTILS = utils parsing max_in_stack
 STACK_FILES = stack print_stacks stack_checks stack_operations
 OP_FILES = operations push swap rotate reverse_rotate
 CHECKER_FILES = checker
-CHUNK_FILES = chunk
+CHUNK_FILES = chunk chunk_size
 SOLVER_FILES = main solving_utils set_sorted_pos radix_sort chunk_sort optimization smol_sort \
 	push_chunks_to_b push_chunks_back_to_a
 

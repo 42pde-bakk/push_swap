@@ -9,7 +9,6 @@
 void	add_operation(const t_opcode op, t_collection *stacks, t_vector *ops)
 {
 	vector_pushback(ops, op);
-	print_operation(op, STDERR_FILENO);
 	execute_operation(op, stacks);
 }
 

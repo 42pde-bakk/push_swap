@@ -42,7 +42,7 @@ def assert_checker_outcome(test_output, desired_outcome):
 
 def tester(*args) -> tuple:
 	arg = create_array(args)
-	# print(" ".join(arg))
+	print(" ".join(arg))
 	p = subprocess.Popen(f'ARG="{" ".join(arg)}"; ./push_swap $ARG | ./checker $ARG', shell=True,
 						 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout = p.stdout.read().decode('ascii')
@@ -106,7 +106,7 @@ def moulinette(argv):
 	# print(tester(5))
 	# print(tester(27))
 	for i in range(1, len(argv)):
-		average_ops = get_average(int(argv[i]), 200)
+		average_ops = get_average(int(argv[i]), 1)
 		print(f'Average amount of operations for test {argv[i]} is {average_ops}')
 
 

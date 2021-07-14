@@ -13,8 +13,8 @@ static size_t	max(const size_t a, const size_t b)
 
 size_t	get_max_element(const t_stack *stack)
 {
-	t_stacknode *temp;
-	size_t max_elem;
+	t_stacknode	*temp;
+	size_t		max_elem;
 
 	max_elem = 0;
 	temp = stack->top;

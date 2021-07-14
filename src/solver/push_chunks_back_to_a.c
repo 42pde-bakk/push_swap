@@ -12,15 +12,17 @@ void	sync_up(t_collection *stacks, t_vector *ops)
 		add_operation(RRA, stacks, ops);
 }
 
-void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, t_chunk *chunk)
+void	push_logic(t_collection *stacks, t_vector *ops, \
+		ssize_t steps, t_chunk *chunk)
 {
-	const t_opcode ROT_DIR = get_rotation_direction(stacks->b, steps);
+	const t_opcode	ROT_DIR = get_rotation_direction(stacks->b, steps);
 
 	while (stacks->b->top->sorted_pos != (unsigned int)chunk->max)
 	{
-		if (stacks->b->top->sorted_pos == (unsigned int)chunk->max - 1) {
+		if (stacks->b->top->sorted_pos == (unsigned int)chunk->max - 1)
 			add_operation(PA, stacks, ops);
-		} else if (stacks->b->top->sorted_pos == (unsigned int)chunk->min) {
+		else if (stacks->b->top->sorted_pos == (unsigned int)chunk->min)
+		{
 			add_operation(PA, stacks, ops);
 			if (stacks->a->size > 1)
 				add_operation(RA, stacks, ops);
@@ -30,15 +32,15 @@ void	push_logic(t_collection *stacks, t_vector *ops, ssize_t steps, t_chunk *chu
 			add_operation(ROT_DIR, stacks, ops);
 	}
 	add_operation(PA, stacks, ops);
-	if (stacks->a->size > 1 && stacks->a->top->sorted_pos == stacks->a->top->prev->sorted_pos + 1)
-	{
+	if (stacks->a->size > 1 && \
+		stacks->a->top->sorted_pos == stacks->a->top->prev->sorted_pos + 1)
 		add_operation(SA, stacks, ops);
-	}
 }
 
-void	push_chunk_to_a(t_collection *stacks, t_vector *operations, t_chunk current_chunk)
+void	push_chunk_to_a(t_collection *stacks, t_vector *operations, \
+	t_chunk current_chunk)
 {
-	ssize_t steps;
+	ssize_t	steps;
 
 	while (current_chunk.max >= current_chunk.min)
 	{
@@ -50,7 +52,8 @@ void	push_chunk_to_a(t_collection *stacks, t_vector *operations, t_chunk current
 	sync_up(stacks, operations);
 }
 
-void	push_back_to_a(t_collection *stacks, t_vector *operations, const int CHUNK_SIZE, const int CHUNK_AMOUNT)
+void	push_back_to_a(t_collection *stacks, t_vector *operations, \
+	const int CHUNK_SIZE, const int CHUNK_AMOUNT)
 {
 	t_chunk	current_chunk;
 
