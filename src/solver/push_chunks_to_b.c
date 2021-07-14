@@ -5,40 +5,53 @@
 #include "solver.h"
 #include "chunk.h"
 
+#define LOWER 0
+#define UPPER 1
+
+void	init_chunks(t_chunk *lower_chunk, t_chunk *upper_chunk, \
+					const int CHUNK_SIZE, const int CHUNK_AMOUNT)
+{
+	*lower_chunk = chunk_init(CHUNK_AMOUNT / 2 - 1, CHUNK_SIZE);
+	*upper_chunk = chunk_init(CHUNK_AMOUNT / 2, CHUNK_SIZE);
+}
+
+void	fill(size_t *fillings, const int CHUNK_SIZE, t_chunk *chunk, int id)
+{
+	++(*fillings);
+	if (*fillings % CHUNK_SIZE == 0)
+	{
+		if (id == LOWER)
+			chunk_decrease(chunk);
+		else
+			chunk_increase(chunk);
+	}
+}
 
 void	push_chunks_to_b(t_collection *stacks, t_vector *operations, \
 const int CHUNK_SIZE, const int CHUNK_AMOUNT)
 {
-	t_chunk	upper_chunk;
-	t_chunk	lower_chunk;
-	size_t	upper_fill;
-	size_t	lower_fill;
+	t_chunk	chunks[2];
+	size_t	fillings[2];
 
-	upper_chunk = chunk_init(CHUNK_AMOUNT / 2, CHUNK_SIZE);
-	lower_chunk = chunk_init(CHUNK_AMOUNT / 2 - 1, CHUNK_SIZE);
-	upper_fill = 0;
-	lower_fill = 0;
+	init_chunks(&chunks[LOWER], &chunks[UPPER], CHUNK_SIZE, CHUNK_AMOUNT);
+	fillings[LOWER] = 0;
+	fillings[UPPER] = 0;
 	while (!stack_is_empty(stacks->a))
 	{
-		if (is_within_chunk((int)stacks->a->top->sorted_pos, &upper_chunk))
+		if (is_within_chunk((int)stacks->a->top->sorted_pos, &chunks[UPPER]))
 		{
 			add_operation(PB, stacks, operations);
-			++upper_fill;
-			if (upper_fill % CHUNK_SIZE == 0)
-				++(upper_chunk.nb);
+			fill(&fillings[UPPER], CHUNK_SIZE, &chunks[UPPER], UPPER);
 		}
-		else if (is_within_chunk((int)stacks->a->top->sorted_pos, &lower_chunk))
+		else if (is_within_chunk((int)stacks->a->top->sorted_pos, \
+			&chunks[LOWER]))
 		{
 			add_operation(PB, stacks, operations);
-			if (upper_fill > 0 || lower_chunk.nb != CHUNK_AMOUNT / 2 - 1)
+			if (fillings[UPPER] > 0 || chunks[LOWER].nb != CHUNK_AMOUNT / 2 - 1)
 				add_operation(RB, stacks, operations);
-			++lower_fill;
-			if (lower_fill % CHUNK_SIZE == 0)
-				--(lower_chunk.nb);
+			fill(&fillings[LOWER], CHUNK_SIZE, &chunks[LOWER], LOWER);
 		}
 		else
-		{
 			add_operation(RA, stacks, operations);
-		}
 	}
 }
