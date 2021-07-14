@@ -106,7 +106,7 @@ def moulinette(argv):
 	# print(tester(5))
 	# print(tester(27))
 	for i in range(1, len(argv)):
-		average_ops = get_average(int(argv[i]), 200)
+		average_ops = get_average(int(argv[i]), 100)
 		print(f'Average amount of operations for test {argv[i]} is {average_ops}')
 
 
