@@ -23,6 +23,8 @@ static void	sort_three(t_collection *stacks, t_vector *ops)
 {
 	const unsigned int	max = stacks->a->size + stacks->b->size - 1;
 
+	if (stack_is_sorted(stacks->a))
+		return;
 	if (stacks->a->top->sorted_pos == max)
 		add_operation(RA, stacks, ops);
 	else if (stacks->a->top->prev->sorted_pos == max)
