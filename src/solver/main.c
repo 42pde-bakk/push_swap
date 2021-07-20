@@ -22,13 +22,9 @@ int	main(int argc, char **argv)
 		parse_array(coll, argv, 1);
 	set_sorted_pos(coll);
 	if (coll->a->size <= 5)
-	{
 		operations = smol_sort(coll);
-	}
 	else
-	{
 		operations = chunk_sort(coll);
-	}
 	optimize_instructions(operations);
 	print_all_operations(operations);
 	vector_destroy(operations);
