@@ -55,7 +55,7 @@ size_t	get_smallest_negative_value(const t_collection *coll)
 void	build_arrays_of_indices(t_vector *all_items, t_vector *neg_idxs,
 								t_vector *pos_idxs, t_collection *coll)
 {
-	size_t		i;
+	int			i;
 	int			value;
 	t_stacknode	*tmp;
 
