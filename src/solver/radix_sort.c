@@ -5,24 +5,20 @@
 #include "stack.h"
 #include "solver.h"
 #include "vector.h"
-#include "utils.h"
 
-size_t	get_max_rotations(const t_stack *stack, const size_t shift_bits_amount)
+static unsigned int	get_max_bits(const unsigned int max_num)
 {
-	size_t		rots;
-	t_stacknode	*node;
+	unsigned int	max_bits;
 
-	node = stack->bottom;
-	rots = 1;
-	while (node != stack->top)
-	{
-		if (((node->sorted_pos >> shift_bits_amount) & 1) == 1)
-			return (rots);
-		++rots;
-		node = node->next;
-	}
-	return (stack->size);
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	return (max_bits);
 }
+
+/* Credit where credit is due:
+ * https://medium.com/nerd-for-tech/push-swap-tutorial-fa746e6aba1e
+*/
 
 t_vector	*radix_sort(t_collection *coll)
 {

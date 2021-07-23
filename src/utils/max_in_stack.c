@@ -25,13 +25,3 @@ size_t	get_max_element(const t_stack *stack)
 	}
 	return (max_elem);
 }
-
-unsigned int	get_max_bits(const unsigned int max_num)
-{
-	unsigned int	max_bits;
-
-	max_bits = 0;
-	while ((max_num >> max_bits) != 0)
-		++max_bits;
-	return (max_bits);
-}
