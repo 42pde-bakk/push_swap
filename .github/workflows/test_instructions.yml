@@ -1,0 +1,27 @@
+name: Ubuntu C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: git submodule update --init --recursive --remote
+      - run: make re
+      - name: Three sort
+        run: ./tester 3
+      - name: Five sort
+        run: ./tester 5
+      - name: Ten sort
+        run: ./tester 10
+      - name: One-hundred sort
+        run: ./tester 100
+      - name: Five-hundred sort
+        run: ./tester 500
