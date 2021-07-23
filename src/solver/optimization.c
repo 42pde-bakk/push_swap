@@ -19,7 +19,7 @@ void	optimize_instructions(t_vector *ops)
 
 	i = 0;
 	if (ops->size == 0)
-		return;
+		return ;
 	while (i < ops->size - 1)
 	{
 		if ((ops->arr[i] == SA && ops->arr[i + 1] == SB) || \
