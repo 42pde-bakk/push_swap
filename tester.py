@@ -3,6 +3,8 @@ import sys
 import subprocess
 import random
 
+from typing import Tuple
+
 DEFAULT_AMOUNT = 4
 
 
@@ -69,45 +71,33 @@ def assert_amount_ops(test_input, amount_ops):
 		assert test_input > key or amount_ops < max_ops[key]
 
 
-def get_average(test_input, amount_tests=10) -> int:
+def get_average(test_input, amount_tests=10) -> Tuple[int, int]:
 	print(f'Running tests for test input {test_input}!')
 	total_ops = 0
+	failure = 0
 	for nb in range(amount_tests):
 		result, amount_ops = tester(test_input)
 		if result != 'OK':
+			failure = 1
 			print(f'KO on input "{test_input}"') and quit()
 		try:
 			assert_amount_ops(test_input, amount_ops)
 		except AssertionError as e:
+			failure = 1
 			print(f'{amount_ops} instructions is too many!!!!')
 		total_ops += amount_ops
-	return int(total_ops / amount_tests)
+	return int(total_ops / amount_tests), failure
 
 
 # noinspection PyTypeChecker
 def moulinette(argv):
-	# score = 0
-	# try:
-	# 	# Checker program - Error management
-	# 	score += assert_checker_outcome(test_checker_parsing('hallo', 1, 2), 'Error')
-	# 	score += assert_checker_outcome(test_checker_parsing(2, 1, 2), 'Error')
-	# 	score += assert_checker_outcome(test_checker_parsing(238972, 2147483649, 789), 'Error')
-	# 	score += assert_checker_outcome(test_checker_parsing(""), 'Error')
-	# 	# score += assert_checker_outcome(test_checker_operations([0, 9, 1, 8, 2, 7, 3, 6, 4, 5], ['sa', 'pc', 'rr']), 'KO')
-	# 	# score += assert_checker_outcome(test_checker_operations([0, 9, 1, 8, 2, 7, 3, 6, 4, 5], ['sa', 'pb', 'rr']), 'KO')
-	# 	# score += tester(0, 1, 2)
-	# 	print(f'All tests passed, final score is {score}')
-	# except AssertionError as e:
-	# 	print(f'Test failed because {e}, final score is {score}')
-
-	# print(tester(1043, 6630, 239, 4551, 9159))
-	# print(tester(1750, 9715, 3048, 3453, 9149))
-	# print(tester(8, 5, 6, 3, 2, 1))
-	# print(tester(5))
-	# print(tester(27))
+	final_exit_status = 0
 	for i in range(1, len(argv)):
-		average_ops = get_average(int(argv[i]), 100)
+		average_ops, status_code = get_average(int(argv[i]), 100)
+		if status_code != 0:
+			final_exit_status = status_code
 		print(f'Average amount of operations for test {argv[i]} is {average_ops}')
+	exit(final_exit_status)
 
 
 if __name__ == "__main__":
