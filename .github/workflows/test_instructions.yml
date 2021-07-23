@@ -16,12 +16,12 @@ jobs:
       - run: git submodule update --init --recursive --remote
       - run: make re
       - name: Three sort
-        run: ./tester 3
+        run: ./tester.py 3
       - name: Five sort
-        run: ./tester 5
+        run: ./tester.py 5
       - name: Ten sort
-        run: ./tester 10
+        run: ./tester.py 10
       - name: One-hundred sort
-        run: ./tester 100
+        run: ./tester.py 100
       - name: Five-hundred sort
-        run: ./tester 500
+        run: ./tester.py 500
