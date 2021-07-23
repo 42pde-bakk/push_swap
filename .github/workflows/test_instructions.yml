@@ -1,4 +1,4 @@
-name: Ubuntu C/C++ CI
+name: Test Amount of Instructions C/C++ CI
 
 on:
   push:
