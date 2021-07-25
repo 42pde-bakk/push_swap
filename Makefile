@@ -27,7 +27,8 @@ SOLVER_SRCS = $(addprefix $(SOLVER_DIR)/, $(addsuffix .c, $(SOLVER_FILES)))
 OBJS = $(SRCS:.c=.o)
 CHECKER_OBJS = $(CHECKER_SRCS:.c=.o)
 SOLVER_OBJS = $(SOLVER_SRCS:.c=.o)
-LIBS = libft.a getnextline.a ft_printf.a libc_vector.a
+LIBS_FOR_CHECKER = libft.a getnextline.a ft_printf.a
+LIBS_FOR_PUSHSWAP = libft.a ft_printf.a libc_vector.a
 
 # COLORS
 PINK = \x1b[35;01m
@@ -50,12 +51,12 @@ export DEBUG
 
 all: $(NAME)
 
-$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(SOLVER_OBJS) $(LIBS) -o $@
+$(word 1, $(NAME)): $(OBJS) $(SOLVER_OBJS) $(LIBS_FOR_PUSHSWAP)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(SOLVER_OBJS) $(LIBS_FOR_PUSHSWAP) -o $@
 	@printf "$(PINK)Done building push_swap $(RESET)\n"
 
-$(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) libft.a getnextline.a ft_printf.a
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(CHECKER_OBJS) $(LIBS) -o $@
+$(word 2, $(NAME)): $(OBJS) $(CHECKER_OBJS) $(LIBS_FOR_CHECKER)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(CHECKER_OBJS) $(LIBS_FOR_CHECKER) -o $@
 	@printf "$(PINK)Done building checker $(RESET)\n"
 
 %.a: %
