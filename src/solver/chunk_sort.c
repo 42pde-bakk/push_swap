@@ -4,7 +4,6 @@
 
 #include "stack.h"
 #include "solver.h"
-#include <unistd.h>
 #include "chunk.h"
 
 t_vector	*chunk_sort(t_collection *stacks)
