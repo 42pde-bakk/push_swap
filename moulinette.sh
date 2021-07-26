@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
+
+RED=$'\e[1;31m'
+GREEN=$'\e[1;32m'
+YELLOW=$'\e[1;33m'
+BLUE=$'\e[1;34m'
+MAGENTA=$'\e[1;35m'
+CYN=$'\e[1;36m'
+END=$'\e[0m'
 make -s
 
 
 function exit_fatal {
-  echo "Failed './$*'"
+  echo "$RED [KO] $END Failed './$*'"
   exit 1
 }
 
@@ -19,6 +27,7 @@ function test_outcome {
   if [[ "$output" != "$3" ]]; then
     exit_fatal "$1" "$2"
   fi
+  echo "$MAGENTA [OK] $END. './$1 $2' correctly output '$3'"
 }
 
 # $1 is the list of arguments to pass to the program
@@ -30,7 +39,7 @@ function test_amount_instructions {
   fi
   instructionAmount=$(wc -l < /tmp/push_swap_output.txt)
   if [[ instructionAmount -gt "$2" ]]; then
-    echo "$instructionAmount instructions is too many!"
+    echo " $RED $instructionAmount $END instructions is too many!"
     exit_fatal "$*"
   fi
 }
@@ -66,3 +75,5 @@ test_amount_instructions  "$random_range" 12
 
 # ARG=<5 random values>; ./push_swap $ARG | ./checker $ARG
 # check that its no more than 12 instructions
+
+echo "$GREEN" "[OK]" "$END" "Passed every test, congratulations!"
