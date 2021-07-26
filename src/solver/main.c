@@ -6,7 +6,6 @@
 #include "push_swap.h"
 #include "solver.h"
 #include "vector.h"
-#include "libft.h"
 
 int	main(int argc, char **argv)
 {
@@ -15,7 +14,7 @@ int	main(int argc, char **argv)
 
 	coll = create_stacks();
 	if (argc == 1)
-		fatal_error("Error");
+		return (cleanup(coll));
 	else if (argc == 2)
 		parse_split_array(coll, argv[1]);
 	else
