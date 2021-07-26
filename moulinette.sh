@@ -42,6 +42,7 @@ function test_amount_instructions {
     echo " $RED $instructionAmount $END instructions is too many!"
     exit_fatal "$*"
   fi
+  echo "$CYN [Nice] $END './push_swap $1' sorted the array in $instructionAmount/$2 instructions!"
 }
 
 
