@@ -49,6 +49,8 @@ t_vector	*smol_sort(t_collection *stacks)
 	t_vector	*operations;
 
 	operations = vector_init(stacks->a->size);
+	if (sort_is_done(stacks))
+		return (operations);
 	push_smallest_to_b(stacks, operations);
 	sort_three(stacks, operations);
 	push_b_to_a(stacks, operations);

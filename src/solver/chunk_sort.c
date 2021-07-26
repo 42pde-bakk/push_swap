@@ -4,7 +4,6 @@
 
 #include "stack.h"
 #include "solver.h"
-#include <unistd.h>
 #include "chunk.h"
 
 t_vector	*chunk_sort(t_collection *stacks)
@@ -15,6 +14,8 @@ t_vector	*chunk_sort(t_collection *stacks)
 	t_vector	*operations;
 
 	operations = vector_init(chunk_size);
+	if (sort_is_done(stacks))
+		return (operations);
 	push_chunks_to_b(stacks, operations, chunk_size, chunk_amounts);
 	push_back_to_a(stacks, operations, (int)chunk_size, (int)chunk_amounts);
 	return (operations);
