@@ -12,6 +12,8 @@ int	is_valid_arg(const char *s)
 	int	i;
 
 	i = 0;
+	if (s[i] == '\0')
+		return (false);
 	while (s[i])
 	{
 		if (!(s[i] == '-' || s[i] == '+' || (s[i] >= '0' && s[i] <= '9')))
@@ -21,41 +23,39 @@ int	is_valid_arg(const char *s)
 	return (true);
 }
 
-void	parse_array(t_collection *coll, char **argv, int i)
+void	parse_array(t_collection *stacks, char **argv, int i)
 {
 	int				item;
+	bool			error;
 	unsigned int	digits_amount;
 
+	error = false;
 	while (argv[i])
 	{
 		if (!is_valid_arg(argv[i]))
-		{
-			delete_stack(coll->a);
-			fatal_error("Error");
-		}
-		item = atoi_exit_on_error(argv[i]);
+			fatal_error(stacks, "Error");
+		item = atoi_exit_on_error(argv[i], &error);
+		if (error)
+			fatal_error(stacks, "Error");
 		digits_amount = amount_digits(item);
-		if (stack_duplicate_check(coll->a, item))
-		{
-			delete_stack(coll->a);
-			fatal_error("Error");
-		}
-		if (digits_amount > coll->max_amount_digits)
-			coll->max_amount_digits = digits_amount;
-		stack_push_under(coll->a, ft_atoi(argv[i]));
+		if (stack_duplicate_check(stacks->a, item))
+			fatal_error(stacks, "Error");
+		if (digits_amount > stacks->max_amount_digits)
+			stacks->max_amount_digits = digits_amount;
+		stack_push_under(stacks->a, ft_atoi(argv[i]));
 		++i;
 	}
 }
 
-void	parse_split_array(t_collection *coll, char *s)
+void	parse_split_array(t_collection *stacks, char *s)
 {
 	char	**array;
 	int		i;
 
 	array = ft_split(s, ' ');
-	if (array == NULL)
-		fatal_error("Error");
-	parse_array(coll, array, 0);
+	if (array == NULL || array[0] == NULL)
+		fatal_error(stacks, "Error");
+	parse_array(stacks, array, 0);
 	i = 0;
 	while (array[i])
 	{
@@ -65,12 +65,4 @@ void	parse_split_array(t_collection *coll, char *s)
 	}
 	free(array);
 	array = NULL;
-}
-
-int	cleanup(t_collection *coll)
-{
-	delete_stack(coll->a);
-	delete_stack(coll->b);
-	free(coll);
-	return (0);
 }

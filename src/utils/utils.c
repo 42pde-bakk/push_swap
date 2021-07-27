@@ -6,8 +6,17 @@
 #include "libft.h"
 #include "limits.h"
 
-void	fatal_error(const char *s)
+int	cleanup(t_collection *stacks)
 {
+	delete_stack(stacks->a);
+	delete_stack(stacks->b);
+	free(stacks);
+	return (0);
+}
+
+void	fatal_error(t_collection *stacks, const char *s)
+{
+	cleanup(stacks);
 	ft_putendl_fd(s, 2);
 	exit(EXIT_FAILURE);
 }
@@ -27,7 +36,7 @@ unsigned int	amount_digits(int n)
 	return (digits);
 }
 
-int	atoi_exit_on_error(const char *str)
+int	atoi_exit_on_error(const char *str, bool *error)
 {
 	int			sign;
 	int			i;
@@ -49,7 +58,7 @@ int	atoi_exit_on_error(const char *str)
 	{
 		result = (10 * result) + (str[i] - '0');
 		if (result < INT_MIN || result > INT_MAX)
-			fatal_error("Error");
+			*error = true;
 		++i;
 	}
 	return (sign * (int)result);

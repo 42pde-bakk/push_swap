@@ -45,6 +45,9 @@ ifdef DEBUG
 else
  CFLAGS += -Ofast
 endif
+ifdef OPCOUNT
+ CFLAGS += -D OPCOUNT
+endif
 SHELL := /bin/bash
 export SHELL
 export DEBUG

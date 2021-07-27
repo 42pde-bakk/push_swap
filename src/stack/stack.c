@@ -12,14 +12,14 @@ t_collection	*create_stacks(void)
 
 	out = (t_collection *)ft_calloc(1, sizeof(t_collection));
 	if (out == NULL)
-		fatal_error("Error allocating memory for stack collection");
+		fatal_error(out, "Error allocating memory for stack collection");
 	out->a = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (out->a == NULL)
-		fatal_error("Error allocating memory for stack A");
+		fatal_error(out, "Error allocating memory for stack A");
 	out->a->id = 'a';
 	out->b = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (out->b == NULL)
-		fatal_error("Error allocating memory for stack B");
+		fatal_error(out, "Error allocating memory for stack B");
 	out->b->id = 'b';
 	return (out);
 }
