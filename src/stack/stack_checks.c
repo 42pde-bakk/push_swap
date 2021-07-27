@@ -30,6 +30,8 @@ bool	sort_is_done(const t_collection *coll)
 	if (!stack_is_empty(coll->b))
 		return (false);
 	tmp = coll->a->top;
+	if (tmp == NULL)
+		return (true);
 	while (tmp->prev)
 	{
 		if (tmp->prev->data < tmp->data)

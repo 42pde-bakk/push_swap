@@ -14,7 +14,7 @@ static t_stacknode	*new_node(int data)
 
 	node = (t_stacknode *)ft_calloc(1, sizeof(t_stacknode));
 	if (!node)
-		fatal_error("Error allocating memory for new stacknode");
+		fatal_error(NULL, "Error allocating memory for new stacknode");
 	node->data = data;
 	return (node);
 }
