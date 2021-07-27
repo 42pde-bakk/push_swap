@@ -15,6 +15,23 @@ static void	clearline(char **line)
 	*line = NULL;
 }
 
+#ifdef OPCOUNT
+
+static void	print_status(const char *status, const unsigned int op_count)
+{
+	ft_dprintf(STDOUT_FILENO, "[%s] in %u instructions.\n", status, op_count);
+}
+
+#else
+
+static void	print_status(const char *status, const unsigned int op_count)
+{
+	(void)op_count;
+	ft_dprintf(STDOUT_FILENO, "[%s]\n", status);
+}
+
+#endif
+
 void	checker(t_collection *coll)
 {
 	static const char	*is_sorted_msg[] = {"KO", "OK"};
@@ -34,8 +51,7 @@ void	checker(t_collection *coll)
 		clearline(&line);
 	}
 	clearline(&line);
-	ft_dprintf(STDOUT_FILENO, "[%s] in %d instructions.\n", \
-	is_sorted_msg[(int)sort_is_done(coll)], op_count);
+	print_status(is_sorted_msg[(int) sort_is_done(coll)], op_count);
 }
 
 int	main(int argc, char **argv)
