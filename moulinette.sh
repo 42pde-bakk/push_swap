@@ -2,8 +2,6 @@
 
 RED=$'\e[1;31m'
 GREEN=$'\e[1;32m'
-YELLOW=$'\e[1;33m'
-BLUE=$'\e[1;34m'
 MAGENTA=$'\e[1;35m'
 CYN=$'\e[1;36m'
 END=$'\e[0m'
@@ -19,7 +17,7 @@ function exit_fatal {
 # $2 is the list of arguments to pass to ./push_swap
 # $3 is the expected outcome
 function test_outcome {
-  if [[ "$2" == "" ]]; then
+  if [[ "$2" == "no-args" ]]; then
     output=$(./"$1" 2>&1) # './push_swap' behaves differently than './push_swap "" '
   else
     output=$(./$"$1" "$2" 2>&1)
@@ -55,8 +53,14 @@ test_outcome  "checker"   "8 2 4 2"  "Error"
 test_outcome  "push_swap" "1 1000 2147483648" "Error"
 test_outcome  "checker"   "1 1000 2147483648" "Error"
 
-test_outcome  "push_swap" "" ""
-test_outcome  "checker" "" ""
+test_outcome  "push_swap" "" "Error"
+test_outcome  "checker" "" "Error"
+
+test_outcome  "push_swap" ' "" "" ' "Error"
+test_outcome  "checker" ' "" "" ' "Error"
+
+test_outcome  "push_swap" "no-args" "" # no-args is a special value so it runs like './push_swap'
+test_outcome  "checker" "no-args" ""
 
 test_outcome  "push_swap" "42" ""
 test_outcome  "push_swap" "0 1 2 3" ""
@@ -71,10 +75,6 @@ test_amount_instructions  "1 5 2 4 3"     12
 
 random_range=$(shuf -i 0-10 -n 5 | tr '\n' ' ')
 test_amount_instructions  "$random_range" 12
-
-# ARG="1 5 2 4 3"; ./push_swap $ARG | ./checker $ARG
-
-# ARG=<5 random values>; ./push_swap $ARG | ./checker $ARG
 # check that its no more than 12 instructions
 
 echo "$GREEN" "[OK]" "$END" "Passed every test, congratulations!"
