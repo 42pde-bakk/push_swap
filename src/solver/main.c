@@ -11,14 +11,17 @@ int	main(int argc, char **argv)
 {
 	t_collection	*coll;
 	t_vector		*operations;
+	int		 		i;
 
 	coll = create_stacks();
+	i = 1;
 	if (argc == 1)
 		return (cleanup(coll));
-	else if (argc == 2)
-		parse_split_array(coll, argv[1]);
-	else
-		parse_array(coll, argv, 1);
+	while (i < argc)
+	{
+		parse_split_array(coll, argv[i]);
+		++i;
+	}
 	set_sorted_pos(coll);
 	if (coll->a->size <= 5)
 		operations = smol_sort(coll);

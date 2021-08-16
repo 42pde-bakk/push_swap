@@ -57,14 +57,16 @@ void	checker(t_collection *coll)
 int	main(int argc, char **argv)
 {
 	t_collection	*coll;
+	int				i;
 
+	i = 1;
 	coll = create_stacks();
-	if (argc == 1)
-		return (cleanup(coll));
-	else if (argc == 2)
-		parse_split_array(coll, argv[1]);
-	else
-		parse_array(coll, argv, 1);
-	checker(coll);
+	while (i < argc)
+	{
+		parse_split_array(coll, argv[i]);
+		++i;
+	}
+	if (coll->a->size > 0)
+		checker(coll);
 	return (cleanup(coll));
 }
