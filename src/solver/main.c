@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 {
 	t_collection	*coll;
 	t_vector		*operations;
-	int		 		i;
+	int				i;
 
 	coll = create_stacks();
 	i = 1;
