@@ -15,7 +15,7 @@ void	sync_up(t_collection *stacks, t_vector *ops)
 void	push_logic(t_collection *stacks, t_vector *ops, \
 		ssize_t steps, t_chunk *chunk)
 {
-	const t_opcode	ROT_DIR = get_rotation_direction(stacks->b, steps);
+	const t_opcode	rot_dir = get_rotation_direction(stacks->b, steps);
 
 	while (stacks->b->top->sorted_pos != (unsigned int)chunk->max)
 	{
@@ -29,7 +29,7 @@ void	push_logic(t_collection *stacks, t_vector *ops, \
 			++(chunk->min);
 		}
 		else
-			add_operation(ROT_DIR, stacks, ops);
+			add_operation(rot_dir, stacks, ops);
 	}
 	add_operation(PA, stacks, ops);
 	if (stacks->a->size > 1 && \

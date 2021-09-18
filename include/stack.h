@@ -49,4 +49,5 @@ int				stack_peek(const t_stack *stack);
 void			print_stacks(const t_collection *stacks);
 void			print_stacks_binary(const t_collection *stacks);
 
-#endif //STACK_H
+//STACK_H
+#endif

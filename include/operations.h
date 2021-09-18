@@ -25,4 +25,5 @@ void		rra(t_collection *collection);
 void		rrb(t_collection *collection);
 void		rrr(t_collection *collection);
 
-#endif //OPERATIONS_H
+//OPERATIONS_H
+#endif

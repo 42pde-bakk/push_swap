@@ -17,4 +17,5 @@ unsigned int	get_max_bits(unsigned int max_num);
 void			clearscreen(void);
 size_t			get_max_element(const t_stack *stack);
 
-#endif //UTILS_H
+//UTILS_H
+#endif
