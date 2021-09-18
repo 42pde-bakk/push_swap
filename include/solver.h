@@ -12,9 +12,9 @@ t_vector	*radix_sort(t_collection *coll);
 
 t_vector	*chunk_sort(t_collection *stacks);
 void		push_chunks_to_b(t_collection *stacks, t_vector *operations, \
-							int CHUNK_SIZE, int CHUNK_AMOUNT);
+                             int CHUNK_SIZE, int CHUNK_AMOUNT);
 void		push_back_to_a(t_collection *stacks, t_vector *operations, \
-							int CHUNK_SIZE, int CHUNK_AMOUNT);
+                           int CHUNK_SIZE, int CHUNK_AMOUNT);
 
 t_vector	*smol_sort(t_collection *stacks);
 

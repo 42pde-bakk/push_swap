@@ -10,10 +10,10 @@
 # include "stack.h"
 
 typedef struct s_chunk {
-	short int	nb;
-	short int	size;
-	int			min;
-	int			max;
+    short int	nb;
+    short int	size;
+    int			min;
+    int			max;
 }				t_chunk;
 
 t_chunk	chunk_init(int nb, int size);

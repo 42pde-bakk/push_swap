@@ -7,19 +7,19 @@
 
 typedef enum e_opcode
 {
-	SA,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR,
-	ERROR
-}t_opcode;
+    SA,
+    SB,
+    SS,
+    PA,
+    PB,
+    RA,
+    RB,
+    RR,
+    RRA,
+    RRB,
+    RRR,
+    ERROR
+} t_opcode;
 
 //OPCODE_H
 #endif
