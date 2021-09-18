@@ -12,26 +12,26 @@
 
 typedef struct s_stacknode
 {
-	int					data;
-	unsigned int		sorted_pos;
-	struct s_stacknode	*prev;
-	struct s_stacknode	*next;
-}t_stacknode;
+    int					data;
+    unsigned int		sorted_pos;
+    struct s_stacknode	*prev;
+    struct s_stacknode	*next;
+} t_stacknode;
 
 typedef struct s_stack
 {
-	unsigned int	size;
-	t_stacknode		*top;
-	t_stacknode		*bottom;
-	char			id;
-}t_stack;
+    unsigned int	size;
+    t_stacknode		*top;
+    t_stacknode		*bottom;
+    char			id;
+} t_stack;
 
 typedef struct s_collection
 {
-	unsigned int	max_amount_digits;
-	t_stack			*a;
-	t_stack			*b;
-}t_collection;
+    unsigned int	max_amount_digits;
+    t_stack			*a;
+    t_stack			*b;
+} t_collection;
 
 t_collection	*create_stacks(void);
 t_collection	*copy_stacks(const t_collection *stack);
