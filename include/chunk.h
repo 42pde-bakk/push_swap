@@ -23,4 +23,5 @@ void	chunk_increase(t_chunk *chunk);
 int		get_chunk_size(t_stack *stack);
 bool	is_within_chunk(int item, const t_chunk *chunk);
 
-#endif //CHUNK_H
+//CHUNK_H
+#endif

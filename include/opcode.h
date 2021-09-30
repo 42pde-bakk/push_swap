@@ -21,4 +21,5 @@ typedef enum e_opcode
 	ERROR
 }t_opcode;
 
-#endif //OPCODE_H
+//OPCODE_H
+#endif

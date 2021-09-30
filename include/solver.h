@@ -27,4 +27,5 @@ void		add_operation(t_opcode op, t_collection *stacks, t_vector *ops);
 void		optimize_instructions(t_vector *ops);
 void		print_all_operations(const t_vector *operations);
 
-#endif //SOLVER_H
+//SOLVER_H
+#endif
