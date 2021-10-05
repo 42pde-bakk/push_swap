@@ -73,7 +73,7 @@ test_amount_instructions  "1 5 2 4 3" 7
 
 test_amount_instructions  "1 5 2 4 3"     12
 
-random_range=$(shuf -i 0-10 -n 5 | tr '\n' ' ')
+random_range=$(seq 1 5 | sort -R | tr '\n' ' ')
 test_amount_instructions  "$random_range" 12
 # check that its no more than 12 instructions
 
