@@ -1,6 +1,14 @@
-//
-// Created by Peer De bakker on 3/29/21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pde-bakk <pde-bakk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 14:55:31 by pde-bakk          #+#    #+#             */
+/*   Updated: 2022/03/01 15:01:35 by pde-bakk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "operations.h"
 #include "libft.h"
@@ -13,12 +21,12 @@ static void	error(t_collection *coll)
 
 t_opcode	string2opcode(const char *str)
 {
-	unsigned long int			i;
-	static const char			*opcode_strings[] = {
-			[SA] = "sa", [SB] = "sb", [SS] = "ss",
-			[PA] = "pa", [PB] = "pb",
-			[RA] = "ra", [RB] = "rb", [RR] = "rr",
-			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr"
+	unsigned long int	i;
+	static char *const	opcode_strings[] = {
+	[SA] = "sa", [SB] = "sb", [SS] = "ss",
+	[PA] = "pa", [PB] = "pb",
+	[RA] = "ra", [RB] = "rb", [RR] = "rr",
+	[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr"
 	};
 
 	i = 0;
@@ -37,11 +45,11 @@ t_opcode	string2opcode(const char *str)
 
 void	print_operation(const t_opcode opcode, const int fd)
 {
-	static const char			*op_stringcodes[] = {
-			[SA] = "sa", [SB] = "sb", [SS] = "ss",
-			[PA] = "pa", [PB] = "pb",
-			[RA] = "ra", [RB] = "rb", [RR] = "rr",
-			[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
+	static char *const	op_stringcodes[] = {
+	[SA] = "sa", [SB] = "sb", [SS] = "ss",
+	[PA] = "pa", [PB] = "pb",
+	[RA] = "ra", [RB] = "rb", [RR] = "rr",
+	[RRA] = "rra", [RRB] = "rrb", [RRR] = "rrr", [ERROR] = "Error"
 	};
 
 	if (opcode != ERROR)
@@ -53,10 +61,10 @@ void	print_operation(const t_opcode opcode, const int fd)
 void	execute_operation(t_opcode opcode, t_collection *collection)
 {
 	static const t_operation	operations[] = {
-			[SA] = &sa, [SB] = &sb, [SS] = &ss,
-			[PA] = &pa, [PB] = &pb,
-			[RA] = &ra, [RB] = &rb, [RR] = &rr,
-			[RRA] = &rra, [RRB] = &rrb, [RRR] = &rrr, [ERROR] = &error
+	[SA] = &sa, [SB] = &sb, [SS] = &ss,
+	[PA] = &pa, [PB] = &pb,
+	[RA] = &ra, [RB] = &rb, [RR] = &rr,
+	[RRA] = &rra, [RRB] = &rrb, [RRR] = &rrr, [ERROR] = &error
 	};
 
 	operations[opcode](collection);

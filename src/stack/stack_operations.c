@@ -1,8 +1,14 @@
-//
-// Created by peerdb on 02-04-21.
-//
-
-// Function to add an item to stack. It increases size by 1
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pde-bakk <pde-bakk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 14:56:59 by pde-bakk          #+#    #+#             */
+/*   Updated: 2022/03/01 14:57:08 by pde-bakk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 #include "utils.h"

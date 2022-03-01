@@ -1,16 +1,24 @@
-//
-// Created by peerdb on 13-07-21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   chunk.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pde-bakk <pde-bakk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 14:55:22 by pde-bakk          #+#    #+#             */
+/*   Updated: 2022/03/01 14:57:46 by pde-bakk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "chunk.h"
 
 t_chunk	chunk_init(const int nb, const int size)
 {
 	const t_chunk	out = {
-			.nb = (short)nb,
-			.size = (short)size,
-			.min = nb * size,
-		 	.max = (nb + 1) * size - 1
+		.nb = (short)nb,
+		.size = (short)size,
+		.min = nb * size,
+		.max = (nb + 1) * size - 1
 	};
 
 	return (out);

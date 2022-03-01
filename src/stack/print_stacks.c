@@ -1,6 +1,14 @@
-//
-// Created by peerdb on 02-04-21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_stacks.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pde-bakk <pde-bakk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 14:56:49 by pde-bakk          #+#    #+#             */
+/*   Updated: 2022/03/01 14:58:52 by pde-bakk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "stack.h"
 #include "libft.h"
@@ -8,7 +16,7 @@
 #include "utils.h"
 
 static void	printf_wrapper(const t_stacknode *node,
-							  int max_digits, const char *end)
+							int max_digits, const char *end)
 {
 	if (node)
 		ft_dprintf(STDERR_FILENO, "%*d%s", max_digits, node->sorted_pos, end);
@@ -17,7 +25,7 @@ static void	printf_wrapper(const t_stacknode *node,
 }
 
 static void	printf_wrapper_binary(const t_stacknode *node,
-									 int max_digits, const char *end)
+									int max_digits, const char *end)
 {
 	if (node)
 	{
@@ -42,7 +50,7 @@ void	print_stacks(const t_collection *stacks)
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
 	ft_dprintf(STDERR_FILENO, "\n%*c|%*c\n\n", -field_width, 'A',
-		   field_width, 'B');
+		field_width, 'B');
 	while (tmp_a || tmp_b)
 	{
 		printf_wrapper(tmp_a, -field_width, "|");
@@ -65,7 +73,7 @@ void	print_stacks_binary(const t_collection *stacks)
 	tmp_a = stacks->a->top;
 	tmp_b = stacks->b->top;
 	ft_dprintf(STDERR_FILENO, "\n%*c|%*c\n\n", -field_width, 'A',
-		   field_width, 'B');
+		field_width, 'B');
 	while (tmp_a || tmp_b)
 	{
 		printf_wrapper_binary(tmp_a, field_width, "|");
