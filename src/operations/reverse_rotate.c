@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "stack.h"
+
 static void	reverse_rotate(t_stack *stack)
 {
 	t_stacknode	*tmp;
