@@ -14,3 +14,5 @@ Because Swap_push isn’t as natural
 
 #### Workflow to test whether my algo stays within the amount of instructions needed to score full points ([YAML file](https://github.com/pde-bakk/push_swap/blob/master/.github/workflows/test_instructions.yml)):
 [![Test Amount of Instructions C/C++ CI](https://github.com/pde-bakk/push_swap/actions/workflows/test_instructions.yml/badge.svg)](https://github.com/pde-bakk/push_swap/actions/workflows/test_instructions.yml)
+
+## Project status: [![pde-bakk's 42 push_swap Score](https://badge42.vercel.app/api/v2/cl1kxvlgu002109lfx5bumh9s/project/2117285)](https://github.com/JaeSeoKim/badge42)
