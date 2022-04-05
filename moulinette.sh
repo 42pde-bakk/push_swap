@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 RED=$'\e[1;31m'
 GREEN=$'\e[1;32m'
@@ -31,7 +31,7 @@ function test_outcome {
 # $1 is the list of arguments to pass to the program
 # $2 is the maximum amount of allowed instructions
 function test_amount_instructions {
-  ./push_swap "$1" 2>&1 | tee /tmp/push_swap_output.txt | ./checker "$1" > /tmp/checker_output.txt 2>&1
+  ./push_swap $1 2>&1 | tee /tmp/push_swap_output.txt | ./checker "$1" > /tmp/checker_output.txt 2>&1
   if grep -q "Error" /tmp/push_swap_output.txt || ! grep -q "[OK]" /tmp/checker_output.txt; then
     exit_fatal "push_swap" "$1"
   fi
@@ -63,9 +63,11 @@ test_outcome  "push_swap" "no-args" "" # no-args is a special value so it runs l
 test_outcome  "checker" "no-args" ""
 
 test_outcome  "push_swap" "42" ""
-test_outcome  "push_swap" "0 1 2 3" ""
-test_outcome  "push_swap" "0 1 2 3 4 5 6 7 8 9" ""
 
+
+test_amount_instructions  "0 1 2 3" 0
+
+test_amount_instructions  "0 1 2 3 4 5 6 7 8 9" 0
 
 test_amount_instructions  "2 1 0"     3
 # check that instruciton is list is 2 OR 3
